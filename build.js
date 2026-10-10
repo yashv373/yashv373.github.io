@@ -91,9 +91,7 @@
     }).join('\n') + '</ul>\n';
   }
   function story(n) {
-    var dl = (n.place ? n.place.toUpperCase() + ', ' : '') + (n.date || '');
-    return '<article class="story">' + logoCol(n.logo, 'lg') + '<div><h3>' + inline(n.headline) + '</h3><p>' +
-      (dl ? '<span class="dateline">' + esc(dl) + '</span> &mdash; ' : '') + inline(n.text) + '</p></div></article>\n';
+    return '<li><span class="when">' + esc(n.date) + '</span>' + logoCol(n.logo, 'lg') + '<span>' + inline(n.text || n.headline) + '</span></li>\n';
   }
 
   function authorsList(s) {
@@ -137,7 +135,7 @@
     h.push('<title>' + esc(title) + '</title>');
     h.push('<meta name="description" content="' + esc(desc) + '">');
     h.push('<meta name="author" content="' + esc(P.name) + '">\n<meta name="robots" content="index, follow, max-image-preview:large">');
-    h.push('<link rel="canonical" href="' + SITE + '">\n<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="/photo.jpg">');
+    h.push('<link rel="canonical" href="' + SITE + '">\n<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">\n<link rel="apple-touch-icon" href="/photo.jpg">');
     h.push('<link rel="alternate" type="text/plain" href="/llms.txt" title="Plain-text summary for AI assistants">');
     h.push('<meta property="og:type" content="profile">\n<meta property="og:site_name" content="' + esc(P.name) + '">\n<meta property="og:title" content="' + esc(title) + '">');
     h.push('<meta property="og:description" content="' + esc(desc) + '">\n<meta property="og:url" content="' + SITE + '">\n<meta property="og:image" content="' + SITE + 'photo.jpg">');
@@ -145,7 +143,7 @@
     h.push('<meta name="twitter:card" content="summary">\n<meta name="twitter:title" content="' + esc(title) + '">\n<meta name="twitter:description" content="' + esc(desc) + '">\n<meta name="twitter:image" content="' + SITE + 'photo.jpg">');
     h.push('<script type="application/ld+json">\n' + jsonld(d) + '\n</script>');
     h.push('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
-    h.push('<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">');
+    h.push('<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Old+Standard+TT:wght@400;700&family=UnifrakturCook:wght@700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">');
     h.push('<link rel="stylesheet" href="style.css">\n</head>\n<body>\n<main>');
 
     h.push('<header class="intro">\n<img class="photo" src="photo.jpg" alt="' + esc(P.name) + '" width="400" height="400">\n<div>\n<h1>' + esc(P.name) + '</h1>');
@@ -165,12 +163,12 @@
     h.push('\n<section id="news">\n<h2>News</h2>\n<div class="paper">');
     h.push('<div class="paper-top"><div class="ear">All the Silicon That\'s Fit to Print</div><p class="masthead">The Yashvardhan Times</p><div class="ear right">Late Edition<br>' + esc(P.updated) + '</div></div>');
     h.push('<div class="paper-bar"><span>Vol. III</span><span>Manipal &middot; Greater Noida &middot; New Delhi</span><span>&#8377;0.00</span></div>');
-    h.push('<div class="stories" tabindex="0" aria-label="News stories">\n' + (d.news || []).map(story).join('') + '</div>');
+    h.push('<ul class="stories" tabindex="0" aria-label="News">\n' + (d.news || []).map(story).join('') + '</ul>');
     h.push('<div class="paper-foot">Scroll for earlier editions</div>\n</div>');
     var oa = gallery(d.outAndAbout);
     if (oa) h.push('<div class="photoblock"><h4>Out and about</h4>' + oa + '</div>');
     h.push('</section>');
-    h.push('\n<footer>' + badge('badge') + '<div><a class="admin-link" href="admin.html">' + esc(P.name) + '</a><br>Last updated ' + esc(P.updated) + '.</div></footer>\n</main>');
+    h.push('\n<footer>' + badge('badge') + '<div><a class="admin-link" href="admin.html">' + esc(P.name) + '</a><br>Last updated ' + esc(P.updated) + '.</div><p class="sig" role="img" aria-label="Signature: ' + esc(P.name) + '"><span>Yashvardhan</span><span>Singh</span></p></footer>\n</main>');
     h.push('<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer"><span class="lb-count" id="lb-count"></span><button class="lb-close" id="lb-close" aria-label="Close">&times;</button><button class="lb-prev" id="lb-prev" aria-label="Previous photo">&lsaquo;</button><figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure><button class="lb-next" id="lb-next" aria-label="Next photo">&rsaquo;</button></div>');
     h.push('<script src="site.js"></script>\n</body>\n</html>\n');
     return h.join('\n');

@@ -13,142 +13,102 @@
   "news": [
     {
       "date": "Sep 2026",
-      "place": "New Delhi",
-      "headline": "At SEMICON India 2026 with the ST Team",
-      "text": "Visited SEMICON India 2026 at Yashobhoomi with the platform design team from ST.",
+      "text": "Visited SEMICON India 2026 at Yashobhoomi, New Delhi, with my team from ST.",
       "logo": "semi"
     },
     {
       "date": "Sep 2026",
-      "place": "",
-      "headline": "ASCON Accelerator Approved for Tapeout; Export Rules Hold It Back",
-      "text": "Our ASCON-128a accelerator got tapeout approval at the IEEE SSCS PICO Chipathon 2026, but export rules on encryption hardware kept it off the final wafer run. A paper on it is under review at IEEE ICEE 2026.",
+      "text": "Our ASCON-128a crypto accelerator got tapeout approval at the IEEE SSCS PICO Chipathon 2026. We couldn't make the final wafer run because of export rules on encryption hardware. A paper on it is under review at IEEE ICEE 2026.",
       "logo": "sscs"
     },
     {
       "date": "Jul 2026",
-      "place": "Greater Noida",
-      "headline": "Starting a Year at STMicroelectronics",
-      "text": "Started a year-long internship in the MDRF group.",
+      "text": "Started a year-long internship at STMicroelectronics, in the MDRF group in Greater Noida.",
       "logo": "st"
     },
     {
       "date": "May 2026",
-      "place": "Manipal",
-      "headline": "Our Sense Amplifier Paper Is Out in IEEE JXCDC",
       "text": "My first-author paper on sense amplifiers for CMOS-MTJ compute-in-memory is out in [IEEE JXCDC](https://ieeexplore.ieee.org/document/11506373).",
       "logo": "jxcdc"
     },
     {
       "date": "May 2026",
-      "place": "Manipal",
-      "headline": "Handing Over ChipMIT's Presidency",
-      "text": "Stepped down as President of ChipMIT and joined its Advisory Board.",
+      "text": "Handed over as President of ChipMIT and joined its Advisory Board.",
       "logo": "chipmit"
     },
     {
       "date": "Mar 2026",
-      "place": "Manipal",
-      "headline": "Silizium 2026: Three Days of Chip Talks in Manipal",
-      "text": "Led ChipMIT's semiconductor summit, with talks from Intel and AMD, an academic panel and three hands-on workshops.",
+      "text": "Led Silizium 2026, ChipMIT's 3-day semiconductor summit with talks from Intel and AMD, an academic panel, and three hands-on workshops.",
       "logo": "chipmit"
     },
     {
       "date": "Jan 2026",
-      "place": "Manipal",
-      "headline": "Presenting ChipMIT's Work to Marvell",
       "text": "Presented ChipMIT's work to Karthik Anand, AVP at Marvell Technology.",
       "logo": "marvell"
     },
     {
       "date": "Jan 2026",
-      "place": "Pune",
-      "headline": "At VLSID 2026 on a Local Fellowship",
-      "text": "Attended the 39th International Conference on VLSI Design on a Local Fellowship.",
+      "text": "Attended VLSID 2026 in Pune on a Local Fellowship.",
       "logo": "vlsid"
     },
     {
       "date": "Nov 2025",
-      "place": "",
-      "headline": "First Place at Silicon Sprint 2025",
-      "text": "Won the Edge AI Accelerator track at Silicon Sprint 2025 (IEEE NITK, IEEE RVCE, Tenstorrent) with a 4×4 systolic array built in 24 hours.",
+      "text": "Our team won the Edge AI Accelerator track at Silicon Sprint 2025 (IEEE NITK, IEEE RVCE, Tenstorrent) by building a 4×4 systolic array in 24 hours.",
       "logo": "nitk"
     },
     {
       "date": "Nov 2025",
-      "place": "Manipal",
-      "headline": "Project Kalki Recognised at SYNCHRON'25",
-      "text": "Special Mention at SYNCHRON'25 and 2nd place at the BIS ECE case study competition.",
+      "text": "Project Kalki got a Special Mention at SYNCHRON'25 and 2nd place at the BIS ECE case study competition.",
       "logo": "chipmit"
     },
     {
       "date": "Oct 2025",
-      "place": "",
-      "headline": "Two New Preprints: Spintronic Crypto and FinFET Sensors",
-      "text": "Posted papers on SSRN and Research Square.",
+      "text": "Posted two preprints: one on spintronic cryptography (SSRN) and one on dopants in NC junctionless FinFET sensors (Research Square).",
       "logo": "ssrn"
     },
     {
       "date": "Oct 2025",
-      "place": "Manipal",
-      "headline": "ChipMIT Hosts Its First Semiconductor Showdown",
-      "text": "ChipMIT ran Semiconductor Showdown with Marvell and the ECE department.",
+      "text": "ChipMIT ran Semiconductor Showdown, MIT Manipal's first chip design contest, with Marvell and the ECE department. 150+ people took part.",
       "logo": "marvell"
     },
     {
       "date": "Sep 2025",
-      "place": "",
-      "headline": "Samsung Fellowship (ISWDP) Completed",
-      "text": "Finished the ISWDP Cohort 5 programme by IISc, Synopsys and Samsung, including the advanced TCAD track.",
+      "text": "Finished the Samsung Fellowship (ISWDP Cohort 5) by IISc, Synopsys and Samsung, including the advanced Sentaurus TCAD track.",
       "logo": "iswdp"
     },
     {
       "date": "Jul 2025",
-      "place": "Bengaluru",
-      "headline": "New Role: Entrepreneur in Residence at Ecosight",
-      "text": "Took on the EIR role at Ecosight Technologies (BeePrecise).",
+      "text": "Became Entrepreneur in Residence at Ecosight Technologies (BeePrecise).",
       "logo": "beeprecise"
     },
     {
       "date": "May 2025",
-      "place": "Bengaluru",
-      "headline": "Joining BeePrecise as a Hardware Intern",
-      "text": "Joined BeePrecise as a hardware intern.",
+      "text": "Joined BeePrecise in Bangalore as a hardware intern.",
       "logo": "beeprecise"
     },
     {
       "date": "Mar 2025",
-      "place": "",
-      "headline": "Brent-Kung Adder Study Posted on arXiv",
       "text": "Put my 32-bit Brent-Kung adder study on [arXiv](https://arxiv.org/abs/2503.18070).",
       "logo": "arxiv"
     },
     {
       "date": "Dec 2024",
-      "place": "Manipal",
-      "headline": "ChipMIT Is Founded",
       "text": "Co-founded ChipMIT with Megh Giri.",
       "logo": "chipmit"
     },
     {
       "date": "Oct 2024",
-      "place": "Manipal",
-      "headline": "Best Hack at M# Manipal Hackathon 2024",
-      "text": "Won Best Hack at M# Manipal Hackathon 2024.",
+      "text": "Won Best Hack at M# Manipal Hackathon 2024, out of 408 teams.",
       "logo": "techtatva"
     },
     {
       "date": "Jul 2024",
-      "place": "Pune",
-      "headline": "Teaching Maths with Teach For India",
-      "text": "Volunteered with Teach For India.",
+      "text": "Started teaching maths to Grade 6 students in Pune with Teach For India.",
       "logo": "tfi"
     },
     {
       "date": "May 2024",
-      "place": "Varanasi",
-      "headline": "First Research Internship, at IIT (BHU)",
-      "text": "Summer research internship on hybrid CMOS-MTJ circuits.",
+      "text": "Summer research internship on spintronics at IIT (BHU) Varanasi.",
       "logo": "iitbhu"
     }
   ],
