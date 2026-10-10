@@ -193,6 +193,7 @@
   .gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--rule); transition: transform 0.25s ease; }
   .gallery a:hover img { transform: scale(1.04); }
   .gallery figcaption { font-size: 0.82rem; line-height: 1.35; color: var(--muted); margin-top: 0.35rem; }
+  .photoblock .gallery { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 
   .lb { position: fixed; inset: 0; z-index: 50; background: rgba(12, 14, 18, 0.94); display: flex; align-items: center; justify-content: center; padding: 2.5rem 3.5rem; }
   .lb[hidden] { display: none; }
@@ -223,6 +224,7 @@
     .compact li { grid-template-columns: 2.4rem minmax(0, 1fr); }
     .compact .when { grid-column: 2; }
     .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .photoblock .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .lb { padding: 3.5rem 0.75rem; }
     .lb .lb-prev, .lb .lb-next { top: auto; bottom: 1rem; transform: none; }
   }
