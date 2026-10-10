@@ -151,16 +151,8 @@
     h.push('<header class="intro">\n<img class="photo" src="photo.jpg" alt="' + esc(P.name) + '" width="400" height="400">\n<div>\n<h1>' + esc(P.name) + '</h1>');
     h.push('<p class="contact">' + contact + '</p>\n<div class="bio">\n' + bio + '\n</div>\n</div>\n</header>');
     h.push('<svg class="cells" id="cells" viewBox="0 0 704 38" aria-hidden="true" focusable="false"></svg>');
-    h.push('<nav class="jump" aria-label="Sections"><a href="#news">news</a> / <a href="#publications">publications</a> / <a href="#projects">projects</a> / <a href="#experience">experience</a> / <a href="#education">education</a> / <a href="#volunteering">volunteering</a> / <a href="#honors">honors</a></nav>');
+    h.push('<nav class="jump" aria-label="Sections"><a href="#publications">publications</a> / <a href="#projects">projects</a> / <a href="#experience">experience</a> / <a href="#education">education</a> / <a href="#volunteering">volunteering</a> / <a href="#honors">honors</a> / <a href="#news">news</a></nav>');
 
-    h.push('\n<section id="news">\n<h2>News</h2>\n<div class="paper">');
-    h.push('<div class="paper-top"><div class="ear">All the Silicon That\'s Fit to Print</div><p class="masthead">The Yashvardhan Times</p><div class="ear right">Late Edition<br>' + esc(P.updated) + '</div></div>');
-    h.push('<div class="paper-bar"><span>Vol. III</span><span>Manipal &middot; Greater Noida &middot; New Delhi</span><span>&#8377;0.00</span></div>');
-    h.push('<div class="stories" tabindex="0" aria-label="News stories">\n' + (d.news || []).map(story).join('') + '</div>');
-    h.push('<div class="paper-foot">Scroll for earlier editions</div>\n</div>');
-    var oa = gallery(d.outAndAbout);
-    if (oa) h.push('<div class="photoblock"><h4>Out and about</h4>' + oa + '</div>');
-    h.push('</section>');
 
     h.push('\n<section id="publications" class="pubs">\n<h2>Publications</h2>\n<p class="section-note">Also on <a href="' + esc(P.scholar) + '">Google Scholar</a>.</p>\n' + (d.publications || []).map(pub).join('') + '</section>');
     h.push('\n<section id="projects">\n<h2>Projects</h2>\n' + (d.projects || []).map(entry).join('') + ((d.smallProjects || []).length ? '<h4>Smaller projects</h4>\n' + compact(d.smallProjects) : '') + '</section>');
@@ -170,6 +162,14 @@
     h.push('\n<section id="honors">\n<h2>Honors &amp; fellowships</h2>\n' + compact(d.honors) + '</section>');
     if (P.before) h.push('\n<section id="before">\n<h2>Before chips</h2>\n<p>' + inline(P.before) + '</p>\n</section>');
 
+    h.push('\n<section id="news">\n<h2>News</h2>\n<div class="paper">');
+    h.push('<div class="paper-top"><div class="ear">All the Silicon That\'s Fit to Print</div><p class="masthead">The Yashvardhan Times</p><div class="ear right">Late Edition<br>' + esc(P.updated) + '</div></div>');
+    h.push('<div class="paper-bar"><span>Vol. III</span><span>Manipal &middot; Greater Noida &middot; New Delhi</span><span>&#8377;0.00</span></div>');
+    h.push('<div class="stories" tabindex="0" aria-label="News stories">\n' + (d.news || []).map(story).join('') + '</div>');
+    h.push('<div class="paper-foot">Scroll for earlier editions</div>\n</div>');
+    var oa = gallery(d.outAndAbout);
+    if (oa) h.push('<div class="photoblock"><h4>Out and about</h4>' + oa + '</div>');
+    h.push('</section>');
     h.push('\n<footer>' + badge('badge') + '<div><a class="admin-link" href="admin.html">' + esc(P.name) + '</a><br>Last updated ' + esc(P.updated) + '.</div></footer>\n</main>');
     h.push('<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer"><span class="lb-count" id="lb-count"></span><button class="lb-close" id="lb-close" aria-label="Close">&times;</button><button class="lb-prev" id="lb-prev" aria-label="Previous photo">&lsaquo;</button><figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure><button class="lb-next" id="lb-next" aria-label="Next photo">&rsaquo;</button></div>');
     h.push('<script src="site.js"></script>\n</body>\n</html>\n');
