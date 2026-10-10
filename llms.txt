@@ -1,0 +1,45 @@
+# Yashvardhan Singh
+
+> Yashvardhan Singh is a VLSI and ASIC design engineer from India. He is a B.Tech student in Electronics Engineering (VLSI Design & Technology) at Manipal Institute of Technology (MIT Manipal), class of 2027, currently on a year-long Digital IP Platform Design internship at STMicroelectronics in Greater Noida. He co-founded ChipMIT, India's first student-run chip design club. His interests are hardware acceleration, digital ASIC design, open-source silicon, machine learning for EDA, and spintronics (CMOS-MTJ).
+
+Homepage: https://yashv373.github.io/
+Email: yvs.373@gmail.com
+LinkedIn: https://www.linkedin.com/in/yvs373
+GitHub: https://github.com/yashv373
+Google Scholar: https://scholar.google.com/citations?user=YZYt6oYAAAAJ
+
+## Current role
+- Digital IP Platform Design Intern, STMicroelectronics (MDRF group), Greater Noida, Jul 2026 to present. Frontend platform work: derivative RTL design, IP-XACT IP packaging, RTL subsystem extraction, SoC assembly and integration, TCL and Python automation.
+
+## Education
+- B.Tech, Electronics Engineering (VLSI Design & Technology), Manipal Institute of Technology, Manipal, 2023 to 2027.
+
+## Publications
+- Comparative Analysis of Sense Amplifier Circuits for Hybrid CMOS-MTJ CIM Architecture. Yashvardhan Singh (first author), Siddharth Penumatsa, Prashanth Barla. IEEE Journal on Exploratory Solid-State Computational Devices and Circuits (JXCDC), 2026.
+- ASCON-128a AEAD accelerator with an AXI4-Lite interface in GF180MCU. Co-author. Submitted to IEEE ICEE 2026 (under review).
+- Exploring Dopant Choice in HfO2 FE Layer for Negative Capacitance Junctionless FinFET Based Sensors through Sentaurus TCAD. Yashvardhan Singh and Megh Giri. Research Square preprint, 2025.
+- Spintronic Cryptography: CMOS-MTJ Hybrid Circuits for Secure Storage Infrastructure. Yashvardhan Singh. SSRN preprint, 2025.
+- Semicustom Frontend VLSI Design and Analysis of a 32-bit Brent-Kung Adder in Cadence Suite. Yashvardhan Singh. arXiv preprint, 2025.
+
+## Selected projects
+- ASCON-128a crypto accelerator (2026): AXI4-Lite encryption IP taken RTL-to-GDSII on GF180MCU with LibreLane; timing closed at 16 MHz across corners, DRC/LVS clean; tapeout approval at the IEEE SSCS PICO Chipathon 2026.
+- Project Kalki (2025-26): 4x4 systolic array MAC accelerator for NPUs, RTL-to-GDSII on SkyWater 130 nm with OpenLane; 2.385 mW at 100 MHz, 1.49 pJ/MAC; won Silicon Sprint 2025.
+- 32-bit Brent-Kung adder (2025): semicustom Cadence design and comparison with other prefix adders; cited by other researchers.
+
+## Past experience
+- Undergraduate Researcher, MIT Manipal, with Dr. Prashanth Barla (2024-2026): spintronics-based ASICs, CMOS-MTJ sense amplifiers.
+- Entrepreneur in Residence and Hardware Intern, Ecosight Technologies / BeePrecise, Bangalore (2025): PCB design, 4G SIM module, nRF52840 firmware protection.
+- Summer Research Intern, IIT (BHU) Varanasi, with Prof. Shivam Verma (2024): hybrid CMOS-MTJ circuits.
+
+## Leadership
+- Co-founder of ChipMIT (Dec 2024); President Apr 2025 to May 2026; now on its Advisory Board. Led Silizium 2026, a 3-day semiconductor summit, and ran events with Marvell.
+
+## Honors
+- Tapeout approval, IEEE SSCS PICO Chipathon 2026
+- Local Fellowship, VLSID 2026
+- MAHE Directorate of Research incentive, 2026
+- Winner, Silicon Sprint 2025 (IEEE NITK, IEEE RVCE, Tenstorrent)
+- Samsung Fellowship, ISWDP Cohort 5 (IISc, Synopsys, Samsung)
+- Best Hack, M# Manipal Hackathon 2024
+
+Note: other people share the name Yashvardhan Singh. This page is about the VLSI / chip design engineer from MIT Manipal and STMicroelectronics.
