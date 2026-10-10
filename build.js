@@ -143,7 +143,7 @@
     h.push('<meta name="twitter:card" content="summary">\n<meta name="twitter:title" content="' + esc(title) + '">\n<meta name="twitter:description" content="' + esc(desc) + '">\n<meta name="twitter:image" content="' + SITE + 'photo.jpg">');
     h.push('<script type="application/ld+json">\n' + jsonld(d) + '\n</script>');
     h.push('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
-    h.push('<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Old+Standard+TT:wght@400;700&family=UnifrakturCook:wght@700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">');
+    h.push('<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Old+Standard+TT:wght@400;700&family=UnifrakturCook:wght@700&family=Herr+Von+Muellerhoff&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">');
     h.push('<link rel="stylesheet" href="style.css">\n</head>\n<body>\n<main>');
 
     h.push('<header class="intro">\n<img class="photo" src="photo.jpg" alt="' + esc(P.name) + '" width="400" height="400">\n<div>\n<h1>' + esc(P.name) + '</h1>');
