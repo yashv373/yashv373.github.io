@@ -15,14 +15,14 @@ Google Scholar: https://scholar.google.com/citations?user=YZYt6oYAAAAJ
 - B.Tech, Electronics Engineering (VLSI Design & Technology), Manipal Institute of Technology, Manipal, 2023 to 2027.
 
 ## Publications
-- Comparative Analysis of Sense Amplifier Circuits for Hybrid CMOS-MTJ CIM Architecture. Yashvardhan Singh (first author), Siddharth Penumatsa, Prashanth Barla. IEEE Journal on Exploratory Solid-State Computational Devices and Circuits (JXCDC), 2026.
-- ASCON-128a AEAD accelerator with an AXI4-Lite interface in GF180MCU. Co-author. Submitted to IEEE ICEE 2026 (under review).
-- Exploring Dopant Choice in HfO2 FE Layer for Negative Capacitance Junctionless FinFET Based Sensors through Sentaurus TCAD. Yashvardhan Singh and Megh Giri. Research Square preprint, 2025.
-- Spintronic Cryptography: CMOS-MTJ Hybrid Circuits for Secure Storage Infrastructure. Yashvardhan Singh. SSRN preprint, 2025.
-- Semicustom Frontend VLSI Design and Analysis of a 32-bit Brent-Kung Adder in Cadence Suite. Yashvardhan Singh. arXiv preprint, 2025.
+- Comparative Analysis of Sense Amplifier Circuits for Hybrid CMOS-MTJ CIM Architecture. Yashvardhan Singh (first author), Siddharth Penumatsa, Prashanth Barla. IEEE Journal on Exploratory Solid-State Computational Devices and Circuits (JXCDC), 2026. https://ieeexplore.ieee.org/document/11506373
+- ASCON-128a AEAD accelerator with an AXI4-Lite interface in GF180MCU. RS Tarun (IIIT Bangalore), Lakshmi Iyer (IIT Bombay), Yashvardhan Singh. Submitted to IEEE ICEE 2026 (under review). Code: https://github.com/yashv373/ascon128
+- Exploring Dopant Choice in HfO2 FE Layer for Negative Capacitance Junctionless FinFET Based Sensors through Sentaurus TCAD. Yashvardhan Singh and Megh Giri. Research Square preprint, 2025. https://www.researchsquare.com/article/rs-7896806/v1
+- Spintronic Cryptography: CMOS-MTJ Hybrid Circuits for Secure Storage Infrastructure. Yashvardhan Singh. SSRN preprint, 2025. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5611750
+- Semicustom Frontend VLSI Design and Analysis of a 32-bit Brent-Kung Adder in Cadence Suite. Yashvardhan Singh. arXiv preprint, 2025. https://arxiv.org/abs/2503.18070
 
 ## Selected projects
-- ASCON-128a crypto accelerator (2026): AXI4-Lite encryption IP taken RTL-to-GDSII on GF180MCU with LibreLane; timing closed at 16 MHz across corners, DRC/LVS clean; tapeout approval at the IEEE SSCS PICO Chipathon 2026.
+- ASCON-128a crypto accelerator (2026): AXI4-Lite encryption IP taken RTL-to-GDSII on GF180MCU with LibreLane; timing closed at 16 MHz across corners, DRC/LVS clean; tapeout approval at the IEEE SSCS PICO Chipathon 2026. Built with RS Tarun (IIIT Bangalore) and Lakshmi Iyer (IIT Bombay).
 - Project Kalki (2025-26): 4x4 systolic array MAC accelerator for NPUs, RTL-to-GDSII on SkyWater 130 nm with OpenLane; 2.385 mW at 100 MHz, 1.49 pJ/MAC; won Silicon Sprint 2025.
 - 32-bit Brent-Kung adder (2025): semicustom Cadence design and comparison with other prefix adders; cited by other researchers.
 

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <title>Yashvardhan Singh | VLSI &amp; ASIC Design Engineer</title>
 <meta name="description" content="Yashvardhan Singh is a VLSI and ASIC design engineer: B.Tech (VLSI) at MIT Manipal, Digital IP intern at STMicroelectronics, and co-founder of ChipMIT.">
 <meta name="author" content="Yashvardhan Singh">
@@ -66,6 +67,7 @@
       "headline": "Comparative Analysis of Sense Amplifier Circuits for Hybrid CMOS-MTJ CIM Architecture",
       "author": [{ "@id": "https://yashv373.github.io/#person" }, { "@type": "Person", "name": "Siddharth Penumatsa" }, { "@type": "Person", "name": "Prashanth Barla" }],
       "datePublished": "2026-05-02",
+      "url": "https://ieeexplore.ieee.org/document/11506373",
       "isPartOf": { "@type": "Periodical", "name": "IEEE Journal on Exploratory Solid-State Computational Devices and Circuits" }
     },
     {
@@ -73,6 +75,7 @@
       "headline": "Exploring Dopant Choice in HfO2 FE Layer for Negative Capacitance Junctionless FinFET Based Sensors through Sentaurus TCAD",
       "author": [{ "@id": "https://yashv373.github.io/#person" }, { "@type": "Person", "name": "Megh Giri" }],
       "datePublished": "2025-10-21",
+      "url": "https://www.researchsquare.com/article/rs-7896806/v1",
       "publisher": { "@type": "Organization", "name": "Research Square" }
     },
     {
@@ -80,6 +83,7 @@
       "headline": "Spintronic Cryptography: CMOS-MTJ Hybrid Circuits for Secure Storage Infrastructure",
       "author": { "@id": "https://yashv373.github.io/#person" },
       "datePublished": "2025-10-16",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5611750",
       "publisher": { "@type": "Organization", "name": "SSRN" }
     },
     {
@@ -87,6 +91,7 @@
       "headline": "Semicustom Frontend VLSI Design and Analysis of a 32-bit Brent-Kung Adder in Cadence Suite",
       "author": { "@id": "https://yashv373.github.io/#person" },
       "datePublished": "2025-03-23",
+      "url": "https://arxiv.org/abs/2503.18070",
       "publisher": { "@type": "Organization", "name": "arXiv" }
     }
   ]
@@ -94,151 +99,141 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #F8F9FB;
-    --ink: #1A2130;
-    --muted: #5B6678;
-    --rule: #DDE2EA;
-    --link: #2257B8;
-    --tile: #FFFFFF;
+    --bg: #FFFFFF;
+    --ink: #111418;
+    --muted: #5E6672;
+    --rule: #E7E9ED;
+    --link: #0B5CAD;
+    --tag: #9A5B00;
     /* layout-layer colours, used only in the cell-row strip */
     --diff: #3E9E62; --poly: #D0453E; --m1: #3B78DE; --m2: #9157D0; --via: #D8A31E;
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #161B24; --ink: #E6E9EF; --muted: #9AA4B5; --rule: #2C3442; --link: #86ADF2; --tile: #F2F4F7;
-    }
-  }
-  :root[data-theme="dark"] {
-    --paper: #161B24; --ink: #E6E9EF; --muted: #9AA4B5; --rule: #2C3442; --link: #86ADF2; --tile: #F2F4F7;
-  }
   *, *::before, *::after { box-sizing: inherit; }
-  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); background: var(--bg); }
   body {
-    margin: 0; background: var(--paper); color: var(--ink);
-    font-family: "Newsreader", Georgia, "Times New Roman", serif;
-    font-size: 1.125rem; line-height: 1.6;
-    font-variant-numeric: oldstyle-nums;
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.0625rem; line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  main { max-width: 46rem; margin: 0 auto; padding: 3.5rem 1.5rem 4rem; }
-  a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-  a:hover { text-decoration-thickness: 2px; }
-  a:focus-visible, summary:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
+  main { max-width: 47rem; margin: 0 auto; padding: 3.5rem 1.5rem 4rem; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 0.18em; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 3px; }
 
   /* ---------- intro ---------- */
   .intro { display: flex; gap: 1.75rem; align-items: flex-start; }
-  .photo {
-    flex: 0 0 auto; width: 9.5rem; height: 9.5rem;
-    object-fit: cover; border-radius: 4px; background: var(--rule);
-  }
-  h1 { font-size: 2.6rem; font-weight: 500; line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 0.4rem; }
+  .photo { flex: 0 0 auto; width: 9.5rem; height: 9.5rem; object-fit: cover; border-radius: 10px; background: var(--rule); }
+  h1 { font-size: 2.4rem; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 0.45rem; }
   .contact { margin: 0 0 1rem; color: var(--muted); }
   .bio p { margin: 0 0 0.8rem; }
 
   .cells { display: block; width: 100%; height: auto; margin: 2.25rem 0 0.75rem; }
-  nav.jump { color: var(--muted); font-size: 1rem; margin-bottom: 1rem; }
+  nav.jump { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
 
   /* ---------- sections ---------- */
-  section { margin-top: 3rem; }
-  h2 {
-    font-size: 1.6rem; font-weight: 500; margin: 0 0 1rem;
-    padding-bottom: 0.35rem; border-bottom: 1px solid var(--rule);
-  }
-  h3 { font-size: 1.15rem; font-weight: 600; margin: 0; line-height: 1.4; }
-  h4 { font-size: 1.05rem; font-weight: 600; margin: 2rem 0 0.6rem; color: var(--muted); }
-  .section-note { margin: -0.4rem 0 1.2rem; color: var(--muted); font-size: 1rem; }
-  .when { color: var(--muted); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+  section { margin-top: 3.25rem; }
+  h2 { font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 1.1rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule); }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 0; line-height: 1.4; }
+  h4 { font-size: 0.98rem; font-weight: 600; margin: 2.2rem 0 0.7rem; color: var(--muted); }
+  .section-note { margin: -0.5rem 0 1.3rem; color: var(--muted); font-size: 0.95rem; }
+  .when { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 0.95rem; }
 
-  /* ---------- logos ---------- */
+  /* ---------- logos: one tile style, three sizes ---------- */
   .lg {
-    width: 2.6rem; height: 2.6rem; object-fit: contain;
-    background: var(--tile); border: 1px solid var(--rule); border-radius: 6px; padding: 3px;
-    display: block;
+    display: block; width: 3rem; height: 3rem; object-fit: contain;
+    background: #fff; border: 1px solid var(--rule); border-radius: 9px; padding: 4px;
   }
-  .lg.sm { width: 1.6rem; height: 1.6rem; border-radius: 4px; padding: 2px; }
-  .lg.xs {
-    display: inline-block; width: 1.15em; height: 1.15em; padding: 1px; border-radius: 3px;
-    vertical-align: -0.2em; margin-right: 0.3em;
-  }
-  .lg.missing { display: none; }
-  .lc { display: flex; flex-direction: column; gap: 0.3rem; }
+  .lg.md { width: 2.4rem; height: 2.4rem; border-radius: 8px; padding: 3px; }
+  .lg.sm { width: 1.9rem; height: 1.9rem; border-radius: 7px; padding: 3px; }
+  .lg.missing { visibility: hidden; }
+  .lc { display: flex; flex-direction: column; gap: 0.4rem; }
 
-  /* news: date | text */
+  /* news: date | logo | text */
   .news { list-style: none; margin: 0; padding: 0; }
-  .news li { display: grid; grid-template-columns: 4.75rem 1fr; gap: 1rem; padding: 0.45rem 0; }
+  .news li { display: grid; grid-template-columns: 4.5rem 1.9rem minmax(0, 1fr); gap: 0.85rem; align-items: start; padding: 0.5rem 0; }
+  .news .when { padding-top: 0.2rem; }
   details.more { margin-top: 0.4rem; }
   details.more summary { cursor: pointer; color: var(--link); padding: 0.3rem 0; width: fit-content; }
 
-  /* logo column + body */
-  .entry { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: 1rem; margin-bottom: 1.8rem; }
-  .entry .meta { margin: 0.1rem 0 0.35rem; color: var(--muted); }
-  .entry p { margin: 0 0 0.4rem; }
-  .entry ul { margin: 0.2rem 0 0; padding-left: 1.2rem; }
-  .entry li { margin-bottom: 0.2rem; }
+  /* entries: logo | body */
+  .entry { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1.1rem; margin-bottom: 2rem; }
+  .entry .meta { margin: 0.1rem 0 0.4rem; color: var(--muted); font-size: 0.97rem; }
+  .entry p { margin: 0 0 0.45rem; }
+  .entry ul { margin: 0.2rem 0 0; padding-left: 1.15rem; }
+  .entry li { margin-bottom: 0.25rem; }
   .role-line { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-  .role-line .when { font-size: 1rem; padding-top: 0.15rem; }
+  .role-line .when { padding-top: 0.1rem; }
+  .links { margin: 0.3rem 0 0; font-size: 0.95rem; color: var(--muted); }
 
   /* publications */
-  .pubs .authors { margin: 0.15rem 0 0; }
-  .pubs .venue { margin: 0; font-style: italic; color: var(--muted); }
-  .pubs .plinks { margin: 0; font-size: 1rem; }
-  .tag {
-    display: inline-block; font-size: 0.85rem; font-style: normal;
-    border: 1px solid var(--rule); border-radius: 3px;
-    padding: 0 0.4rem; margin-left: 0.35rem; color: var(--muted); vertical-align: 0.1em;
-  }
+  .pubs h3 a { color: var(--ink); }
+  .pubs h3 a:hover { color: var(--link); }
+  .pubs .authors { margin: 0.2rem 0 0; }
+  .pubs .venue { margin: 0 0 0.4rem; font-style: italic; color: var(--muted); }
+  .pubs .summary { margin: 0; color: #2B3038; }
+  .tag { display: inline-block; font-size: 0.8rem; font-style: normal; font-weight: 500; color: var(--tag); background: #FFF4E0; border-radius: 4px; padding: 0 0.45rem; margin-left: 0.4rem; vertical-align: 0.08em; }
 
-  /* compact lists */
+  /* compact lists: logo | text | date */
   .compact { list-style: none; margin: 0; padding: 0; }
-  .compact li { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr) auto; gap: 0.85rem; padding: 0.4rem 0; align-items: start; }
-  .compact .when { font-size: 1rem; padding-top: 0.1rem; }
-  .compact .sub { display: block; color: var(--muted); font-size: 1rem; }
+  .compact li { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr) auto; gap: 0.9rem; align-items: center; padding: 0.5rem 0; }
+  .compact .sub { display: block; color: var(--muted); font-size: 0.95rem; }
+  .compact .name { font-weight: 500; }
 
-  /* photos */
-  .gallery {
-    display: flex; gap: 0.65rem; overflow-x: auto;
-    margin: 0.75rem 0 0.2rem; padding-bottom: 0.35rem;
-    scroll-snap-type: x proximity;
-  }
-  .gallery figure { flex: 0 0 13rem; margin: 0; scroll-snap-align: start; }
-  .gallery a { display: block; border-radius: 4px; }
-  .gallery img {
-    display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
-    border-radius: 4px; background: var(--rule);
-  }
-  .gallery figcaption { font-size: 0.9rem; line-height: 1.35; color: var(--muted); margin-top: 0.3rem; }
+  /* photo grids + viewer */
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.75rem, 1fr)); gap: 0.75rem; margin: 0.9rem 0 0.2rem; }
+  .gallery figure { margin: 0; }
+  .gallery a { display: block; border-radius: 8px; overflow: hidden; }
+  .gallery img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--rule); transition: transform 0.25s ease; }
+  .gallery a:hover img { transform: scale(1.04); }
+  .gallery figcaption { font-size: 0.82rem; line-height: 1.35; color: var(--muted); margin-top: 0.35rem; }
 
-  footer {
-    margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--rule);
-    color: var(--muted); font-size: 0.95rem;
-  }
+  .lb { position: fixed; inset: 0; z-index: 50; background: rgba(12, 14, 18, 0.94); display: flex; align-items: center; justify-content: center; padding: 2.5rem 3.5rem; }
+  .lb[hidden] { display: none; }
+  .lb figure { margin: 0; max-width: 100%; text-align: center; }
+  .lb img { display: block; max-width: 100%; max-height: 78vh; margin: 0 auto; border-radius: 6px; }
+  .lb figcaption { color: #E9ECF1; font-size: 0.95rem; margin-top: 0.8rem; }
+  .lb button { position: absolute; background: rgba(255,255,255,0.1); color: #fff; border: 0; border-radius: 999px; width: 2.75rem; height: 2.75rem; font-size: 1.5rem; line-height: 1; cursor: pointer; }
+  .lb button:hover { background: rgba(255,255,255,0.22); }
+  .lb .lb-close { top: 1rem; right: 1rem; }
+  .lb .lb-prev { left: 0.75rem; top: 50%; transform: translateY(-50%); }
+  .lb .lb-next { right: 0.75rem; top: 50%; transform: translateY(-50%); }
+  .lb .lb-count { position: absolute; top: 1.4rem; left: 1.25rem; color: #AEB5C0; font-size: 0.9rem; }
+
+  footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.92rem; }
 
   @media (max-width: 560px) {
-    body { font-size: 1.0625rem; }
+    body { font-size: 1rem; }
     main { padding-top: 2rem; }
     .intro { flex-direction: column; gap: 1.25rem; }
     .photo { width: 7.5rem; height: 7.5rem; }
-    h1 { font-size: 2.1rem; }
-    .news li { grid-template-columns: 1fr; gap: 0; }
-    .entry { grid-template-columns: 2rem minmax(0, 1fr); gap: 0.75rem; }
-    .entry .lg { width: 2rem; height: 2rem; }
-    .compact li { grid-template-columns: 1.6rem minmax(0, 1fr); }
-    .compact .when { grid-column: 2; padding-top: 0; }
-    .gallery figure { flex-basis: 11rem; }
+    h1 { font-size: 2rem; }
+    .news li { grid-template-columns: 1.9rem minmax(0, 1fr); }
+    .news .when { grid-column: 2; grid-row: 1; padding-top: 0; }
+    .news li > span:last-child { grid-column: 2; }
+    .news li .lg { grid-row: 1 / span 2; }
+    .entry { grid-template-columns: 2.4rem minmax(0, 1fr); gap: 0.85rem; }
+    .entry .lg { width: 2.4rem; height: 2.4rem; }
+    .compact li { grid-template-columns: 2.4rem minmax(0, 1fr); }
+    .compact .when { grid-column: 2; }
+    .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .lb { padding: 3.5rem 0.75rem; }
+    .lb .lb-prev, .lb .lb-next { top: auto; bottom: 1rem; transform: none; }
   }
+  @media (prefers-reduced-motion: reduce) { .gallery img { transition: none; } .gallery a:hover img { transform: none; } }
 </style>
 </head>
 <body>
 <main>
 
   <header class="intro">
-    <img class="photo" src="photo.jpg" alt="Yashvardhan Singh">
+    <img class="photo" src="photo.jpg" alt="Yashvardhan Singh" width="400" height="400">
     <div>
       <h1>Yashvardhan Singh</h1>
       <p class="contact">
@@ -268,42 +263,38 @@
   </nav>
 
   <!--
-    HOW LOGOS WORK: <img class="lg" data-l="st"> first tries logos/st.png.
-    If that file isn't there, it falls back to the org's website icon (if a domain
-    is set in the LOGOS list at the bottom), otherwise it hides itself.
-
-    HOW PHOTOS WORK: <figure data-p="photos/x.jpg"> shows photos/x.jpg.
-    If the file isn't there, the figure disappears. Empty galleries disappear too.
+    LOGOS live in logos/<name>.png. PHOTOS live in photos/.
+    A photo that is missing simply disappears; click any photo to open the viewer.
   -->
 
   <!-- ================= NEWS ================= -->
   <section id="news">
     <h2>News</h2>
     <ul class="news">
-      <li><span class="when">Sep '26</span><span><img class="lg xs" data-l="semi">Visited SEMICON India 2026 at Yashobhoomi, New Delhi, with my team from ST.</span></li>
-      <li><span class="when">Sep '26</span><span><img class="lg xs" data-l="sscs">Our ASCON-128a crypto accelerator got tapeout approval at the IEEE SSCS PICO Chipathon 2026. We couldn't make the final wafer run because of export rules on encryption hardware. A paper on it is under review at IEEE ICEE 2026.</span></li>
-      <li><span class="when">Jul '26</span><span><img class="lg xs" data-l="st">Started a year-long internship at STMicroelectronics, in the MDRF group in Greater Noida.</span></li>
-      <li><span class="when">May '26</span><span><img class="lg xs" data-l="jxcdc">My first-author paper on sense amplifiers for CMOS-MTJ compute-in-memory is out in IEEE JXCDC.</span></li>
-      <li><span class="when">May '26</span><span><img class="lg xs" data-l="chipmit">Handed over as President of ChipMIT and joined its Advisory Board.</span></li>
-      <li><span class="when">Mar '26</span><span><img class="lg xs" data-l="chipmit">Led Silizium 2026, ChipMIT's 3-day semiconductor summit with talks from Intel and AMD, an academic panel, and three hands-on workshops.</span></li>
-      <li><span class="when">Jan '26</span><span><img class="lg xs" data-l="marvell">Presented ChipMIT's work to Karthik Anand, AVP at Marvell Technology.</span></li>
-      <li><span class="when">Jan '26</span><span><img class="lg xs" data-l="vlsid">Attended VLSID 2026 in Pune on a Local Fellowship.</span></li>
-      <li><span class="when">Nov '25</span><span><img class="lg xs" data-l="tenstorrent"><img class="lg xs" data-l="nitk"><img class="lg xs" data-l="rvce">Our team won the Edge AI Accelerator track at Silicon Sprint 2025 (IEEE NITK, IEEE RVCE, Tenstorrent) by building a 4×4 systolic array in 24 hours.</span></li>
-      <li><span class="when">Nov '25</span><span><img class="lg xs" data-l="chipmit">Project Kalki got a Special Mention at SYNCHRON'25 and 2nd place at the BIS ECE case study competition.</span></li>
+      <li><span class="when">Sep '26</span><img class="lg sm" src="logos/semi.png" alt="SEMI" loading="lazy"><span>Visited SEMICON India 2026 at Yashobhoomi, New Delhi, with my team from ST.</span></li>
+      <li><span class="when">Sep '26</span><img class="lg sm" src="logos/sscs.png" alt="IEEE Solid-State Circuits Society" loading="lazy"><span>Our ASCON-128a crypto accelerator got tapeout approval at the IEEE SSCS PICO Chipathon 2026. We couldn't make the final wafer run because of export rules on encryption hardware. A paper on it is under review at IEEE ICEE 2026.</span></li>
+      <li><span class="when">Jul '26</span><img class="lg sm" src="logos/st.png" alt="STMicroelectronics" loading="lazy"><span>Started a year-long internship at STMicroelectronics, in the MDRF group in Greater Noida.</span></li>
+      <li><span class="when">May '26</span><img class="lg sm" src="logos/jxcdc.png" alt="IEEE JXCDC" loading="lazy"><span>My first-author paper on sense amplifiers for CMOS-MTJ compute-in-memory is out in <a href="https://ieeexplore.ieee.org/document/11506373">IEEE JXCDC</a>.</span></li>
+      <li><span class="when">May '26</span><img class="lg sm" src="logos/chipmit.png" alt="ChipMIT" loading="lazy"><span>Handed over as President of ChipMIT and joined its Advisory Board.</span></li>
+      <li><span class="when">Mar '26</span><img class="lg sm" src="logos/chipmit.png" alt="ChipMIT" loading="lazy"><span>Led Silizium 2026, ChipMIT's 3-day semiconductor summit with talks from Intel and AMD, an academic panel, and three hands-on workshops.</span></li>
+      <li><span class="when">Jan '26</span><img class="lg sm" src="logos/marvell.png" alt="Marvell Technology" loading="lazy"><span>Presented ChipMIT's work to Karthik Anand, AVP at Marvell Technology.</span></li>
+      <li><span class="when">Jan '26</span><img class="lg sm" src="logos/vlsid.png" alt="VLSI Society of India" loading="lazy"><span>Attended VLSID 2026 in Pune on a Local Fellowship.</span></li>
+      <li><span class="when">Nov '25</span><img class="lg sm" src="logos/nitk.png" alt="NIT Karnataka" loading="lazy"><span>Our team won the Edge AI Accelerator track at Silicon Sprint 2025 (IEEE NITK, IEEE RVCE, Tenstorrent) by building a 4×4 systolic array in 24 hours.</span></li>
+      <li><span class="when">Nov '25</span><img class="lg sm" src="logos/chipmit.png" alt="ChipMIT" loading="lazy"><span>Project Kalki got a Special Mention at SYNCHRON'25 and 2nd place at the BIS ECE case study competition.</span></li>
     </ul>
     <details class="more">
       <summary>Older news</summary>
       <ul class="news">
-        <li><span class="when">Oct '25</span><span><img class="lg xs" data-l="ssrn"><img class="lg xs" data-l="rsq">Posted two preprints: one on spintronic cryptography (SSRN) and one on dopants in NC junctionless FinFET sensors (Research Square).</span></li>
-        <li><span class="when">Oct '25</span><span><img class="lg xs" data-l="marvell">ChipMIT ran Semiconductor Showdown, MIT Manipal's first chip design contest, with Marvell and the ECE department. 150+ people took part.</span></li>
-        <li><span class="when">Sep '25</span><span><img class="lg xs" data-l="samsung"><img class="lg xs" data-l="iisc"><img class="lg xs" data-l="synopsys">Finished the Samsung Fellowship (ISWDP Cohort 5) by IISc, Synopsys and Samsung, including the advanced Sentaurus TCAD track.</span></li>
-        <li><span class="when">Jul '25</span><span><img class="lg xs" data-l="beeprecise">Became Entrepreneur in Residence at Ecosight Technologies (BeePrecise).</span></li>
-        <li><span class="when">May '25</span><span><img class="lg xs" data-l="beeprecise">Joined BeePrecise in Bangalore as a hardware intern.</span></li>
-        <li><span class="when">Mar '25</span><span><img class="lg xs" data-l="arxiv">Put my 32-bit Brent-Kung adder study on arXiv.</span></li>
-        <li><span class="when">Dec '24</span><span><img class="lg xs" data-l="chipmit">Co-founded ChipMIT with Megh Giri.</span></li>
-        <li><span class="when">Oct '24</span><span><img class="lg xs" data-l="techtatva">Won Best Hack at M# Manipal Hackathon 2024, out of 408 teams.</span></li>
-        <li><span class="when">Jul '24</span><span><img class="lg xs" data-l="tfi">Started teaching maths to Grade 6 students in Pune with Teach For India.</span></li>
-        <li><span class="when">May '24</span><span><img class="lg xs" data-l="iitbhu">Summer research internship on spintronics at IIT (BHU) Varanasi.</span></li>
+        <li><span class="when">Oct '25</span><img class="lg sm" src="logos/ssrn.png" alt="SSRN (Elsevier)" loading="lazy"><span>Posted two preprints: one on spintronic cryptography (SSRN) and one on dopants in NC junctionless FinFET sensors (Research Square).</span></li>
+        <li><span class="when">Oct '25</span><img class="lg sm" src="logos/marvell.png" alt="Marvell Technology" loading="lazy"><span>ChipMIT ran Semiconductor Showdown, MIT Manipal's first chip design contest, with Marvell and the ECE department. 150+ people took part.</span></li>
+        <li><span class="when">Sep '25</span><img class="lg sm" src="logos/iswdp.png" alt="ISWDP (IISc, Synopsys, Samsung)" loading="lazy"><span>Finished the Samsung Fellowship (ISWDP Cohort 5) by IISc, Synopsys and Samsung, including the advanced Sentaurus TCAD track.</span></li>
+        <li><span class="when">Jul '25</span><img class="lg sm" src="logos/beeprecise.png" alt="BeePrecise" loading="lazy"><span>Became Entrepreneur in Residence at Ecosight Technologies (BeePrecise).</span></li>
+        <li><span class="when">May '25</span><img class="lg sm" src="logos/beeprecise.png" alt="BeePrecise" loading="lazy"><span>Joined BeePrecise in Bangalore as a hardware intern.</span></li>
+        <li><span class="when">Mar '25</span><img class="lg sm" src="logos/arxiv.png" alt="arXiv" loading="lazy"><span>Put my 32-bit Brent-Kung adder study on <a href="https://arxiv.org/abs/2503.18070">arXiv</a>.</span></li>
+        <li><span class="when">Dec '24</span><img class="lg sm" src="logos/chipmit.png" alt="ChipMIT" loading="lazy"><span>Co-founded ChipMIT with Megh Giri.</span></li>
+        <li><span class="when">Oct '24</span><img class="lg sm" src="logos/techtatva.png" alt="TechTatva, MIT Manipal" loading="lazy"><span>Won Best Hack at M# Manipal Hackathon 2024, out of 408 teams.</span></li>
+        <li><span class="when">Jul '24</span><img class="lg sm" src="logos/tfi.png" alt="Teach For India" loading="lazy"><span>Started teaching maths to Grade 6 students in Pune with Teach For India.</span></li>
+        <li><span class="when">May '24</span><img class="lg sm" src="logos/iitbhu.png" alt="IIT (BHU) Varanasi" loading="lazy"><span>Summer research internship on spintronics at IIT (BHU) Varanasi.</span></li>
       </ul>
     </details>
 
@@ -311,9 +302,9 @@
       <h4>Out and about</h4>
       <div class="gallery">
         <figure data-p="photos/semicon-1.jpg"><figcaption>SEMICON India 2026, New Delhi</figcaption></figure>
-        <figure data-p="photos/semicon-2.jpg"><figcaption>SEMICON India 2026, with the ST team</figcaption></figure>
+        <figure data-p="photos/semicon-2.jpg"><figcaption>SEMICON India 2026</figcaption></figure>
         <figure data-p="photos/vlsid-1.jpg"><figcaption>VLSID 2026, Pune</figcaption></figure>
-        <figure data-p="photos/vlsid-2.jpg"><figcaption>VLSID 2026, Pune</figcaption></figure>
+        <figure data-p="photos/vlsid-2.jpg"><figcaption>VLSID 2026 tutorials</figcaption></figure>
         <figure data-p="photos/mhash-1.jpg"><figcaption>Best Hack, M# Hackathon 2024</figcaption></figure>
       </div>
     </div>
@@ -322,50 +313,57 @@
   <!-- ================= PUBLICATIONS ================= -->
   <section id="publications" class="pubs">
     <h2>Publications</h2>
-    <p class="section-note">Full list on <a href="https://scholar.google.com/citations?user=YZYt6oYAAAAJ&amp;hl=en">Google Scholar</a>.</p>
+    <p class="section-note">Also on <a href="https://scholar.google.com/citations?user=YZYt6oYAAAAJ&amp;hl=en">Google Scholar</a>.</p>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="jxcdc"></span>
+      <img class="lg" src="logos/jxcdc.png" alt="IEEE JXCDC" loading="lazy">
       <div>
-        <h3>Comparative Analysis of Sense Amplifier Circuits for Hybrid CMOS-MTJ CIM Architecture</h3>
+        <h3><a href="https://ieeexplore.ieee.org/document/11506373">Comparative Analysis of Sense Amplifier Circuits for Hybrid CMOS-MTJ CIM Architecture</a></h3>
         <p class="authors"><b>Yashvardhan Singh</b>, Siddharth Penumatsa, and Prashanth Barla</p>
         <p class="venue">IEEE Journal on Exploratory Solid-State Computational Devices and Circuits (JXCDC), 2026</p>
-        <!-- TODO: add <p class="plinks">(<a href="DOI-LINK">DOI</a>)</p> -->
+        <p class="summary">STT-MTJ memory is a strong fit for compute-in-memory, but reading it reliably is hard. We benchmark six current-mode sense amplifiers (PCSA, IPCSA, SPCSA, RESPCSA, REDSA, HRSA) on power, sensing margin, read delay, transistor count and read errors, and stress them with 1000-run Monte Carlo sweeps. The result is a clear guide to which one to pick for hybrid CMOS-MTJ designs.</p>
+        <p class="links"><a href="https://ieeexplore.ieee.org/document/11506373">IEEE Xplore</a></p>
       </div>
     </div>
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="ieee"></span>
+      <img class="lg" src="logos/ieee.png" alt="IEEE" loading="lazy">
       <div>
-        <h3>ASCON-128a AEAD accelerator with an AXI4-Lite interface, in GF180MCU</h3>
-        <!-- TODO: swap in the real paper title and author list -->
-        <p class="authors">Co-author, with R S, Lakshmi, and others</p>
-        <p class="venue">Submitted to IEEE ICEE 2026 <span class="tag">under review</span></p>
+        <h3>ASCON-128a AEAD Accelerator with an AXI4-Lite Interface in GF180MCU <span class="tag">under review</span></h3>
+        <!-- TODO: swap in the exact paper title and author order once it's out -->
+        <p class="authors">RS Tarun (IIIT Bangalore), Lakshmi Iyer (IIT Bombay), and <b>Yashvardhan Singh</b></p>
+        <p class="venue">Submitted to IEEE ICEE 2026</p>
+        <p class="summary">Describes our plug-and-play encryption IP for open-source SoCs and its full open-source flow, from RTL and verification to a tapeout-ready GF180MCU layout.</p>
+        <p class="links"><a href="https://github.com/yashv373/ascon128">GitHub</a></p>
       </div>
     </div>
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="rsq"></span>
+      <img class="lg" src="logos/rsq.png" alt="Research Square" loading="lazy">
       <div>
-        <h3>Exploring Dopant Choice in HfO<sub>2</sub> FE Layer for Negative Capacitance Junctionless FinFET Based Sensors through Sentaurus TCAD</h3>
-        <!-- TODO: check author order -->
+        <h3><a href="https://www.researchsquare.com/article/rs-7896806/v1">Exploring Dopant Choice in HfO<sub>2</sub> FE Layer for Negative Capacitance Junctionless FinFET Based Sensors through Sentaurus TCAD</a></h3>
         <p class="authors"><b>Yashvardhan Singh</b> and Megh Giri</p>
         <p class="venue">Research Square (Springer Nature) preprint, 2025</p>
+        <p class="summary">We build a negative-capacitance junctionless FinFET sensor in Sentaurus TCAD and try six other dopants in its HfO<sub>2</sub> ferroelectric layer instead of the usual zirconium. The dopant sets how strong the negative-capacitance effect is, which lets the transistor run at very low voltages and pick up very small changes.</p>
+        <p class="links"><a href="https://www.researchsquare.com/article/rs-7896806/v1">Research Square</a> / <a href="https://github.com/yashv373/NC-JL-FinFET-Sensors-TCAD">GitHub</a></p>
       </div>
     </div>
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="ssrn"></span>
+      <img class="lg" src="logos/ssrn.png" alt="SSRN (Elsevier)" loading="lazy">
       <div>
-        <h3>Spintronic Cryptography: CMOS-MTJ Hybrid Circuits for Secure Storage Infrastructure</h3>
+        <h3><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5611750">Spintronic Cryptography: CMOS-MTJ Hybrid Circuits for Secure Storage Infrastructure</a></h3>
         <p class="authors"><b>Yashvardhan Singh</b></p>
         <p class="venue">SSRN (Elsevier) preprint, 2025</p>
+        <p class="summary">Proposes swapping the volatile pipeline registers in SHA-256 hashing hardware for non-volatile CMOS-MTJ storage, so the pipeline can power off without leaking energy. I simulated a 32-bit hybrid barrel shifter (about 5,000 transistors) in Cadence Virtuoso and wrote up where today's verification flows run out of steam.</p>
+        <p class="links"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5611750">SSRN</a></p>
       </div>
     </div>
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="arxiv"></span>
+      <img class="lg" src="logos/arxiv.png" alt="arXiv" loading="lazy">
       <div>
-        <h3>Semicustom Frontend VLSI Design and Analysis of a 32-bit Brent-Kung Adder in Cadence Suite</h3>
+        <h3><a href="https://arxiv.org/abs/2503.18070">Semicustom Frontend VLSI Design and Analysis of a 32-bit Brent-Kung Adder in Cadence Suite</a></h3>
         <p class="authors"><b>Yashvardhan Singh</b></p>
         <p class="venue">arXiv preprint, 2025</p>
-        <p class="plinks">(<a href="https://github.com/yashv373/32-Bit-Brent-Kung-Adder">GitHub</a>)</p>
+        <p class="summary">A semicustom 90 nm design of a 32-bit Brent-Kung adder in the Cadence suite, compared with Kogge-Stone and Han-Carlson adders on delay and other trade-offs. Other researchers have since cited it in their adder and multiplier work.</p>
+        <p class="links"><a href="https://arxiv.org/abs/2503.18070">arXiv</a> / <a href="https://github.com/yashv373/32-Bit-Brent-Kung-Adder">GitHub</a></p>
       </div>
     </div>
   </section>
@@ -375,61 +373,58 @@
     <h2>Projects</h2>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="sscs"><img class="lg" data-l="gf"></span>
+      <span class="lc"><img class="lg" src="logos/sscs.png" alt="IEEE Solid-State Circuits Society" loading="lazy"><img class="lg" src="logos/gf.png" alt="GlobalFoundries" loading="lazy"></span>
       <div>
         <div class="role-line"><h3>ASCON-128a crypto accelerator</h3><span class="when">May – Sep 2026</span></div>
-        <p class="meta">IEEE SSCS PICO Chipathon 2026, Track A · with R S and Lakshmi</p>
-        <p>A reusable, plug-and-play encryption block for open-source SoCs. It wraps a 320-bit ASCON-128a core (NIST SP 800-232) behind an AXI4-Lite interface, and encryption and decryption share the same permutation logic.</p>
+        <p class="meta">IEEE SSCS PICO Chipathon 2026 · with RS Tarun (IIIT Bangalore) and Lakshmi Iyer (IIT Bombay)</p>
+        <p>A plug-and-play encryption IP for open-source SoCs: a 320-bit ASCON-128a core (NIST SP 800-232) behind an AXI4-Lite interface.</p>
         <ul>
-          <li>RTL to GDSII with LibreLane on GF180MCU (7-track cells): 0.92 mm² core, 64.95% utilisation.</li>
-          <li>Timing met at 16 MHz across SS, TT and FF corners; 18.11 mW peak power.</li>
-          <li>Zero DRC, LVS and antenna errors; worst static IR drop about 0.1 mV.</li>
-          <li>Checked with NIST Known-Answer Tests, a Cocotb + Python reference model, and gate-level sims with SDF timing.</li>
-          <li>Packaged as an IP-XACT (IEEE 1685-2014) component with Kactus2.</li>
-          <li>2nd in the proposal round, then a clear "Go" and tapeout approval from the track lead.</li>
+          <li>RTL to GDSII on GF180MCU with LibreLane: 0.92 mm², 16 MHz across all corners, 18 mW, DRC/LVS clean.</li>
+          <li>Verified with NIST test vectors, a Cocotb model and gate-level sims; packaged as IP-XACT.</li>
+          <li>2nd in the proposal round and approved for tapeout.</li>
         </ul>
+        <p class="links"><a href="https://github.com/yashv373/ascon128">GitHub</a></p>
       </div>
     </div>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="chipmit"></span>
+      <img class="lg" src="logos/chipmit.png" alt="ChipMIT" loading="lazy">
       <div>
         <div class="role-line"><h3>Project Kalki</h3><span class="when">Sep 2025 – Feb 2026</span></div>
-        <p class="meta">ChipMIT's flagship project · with Megh Giri · <a href="https://www.youtube.com/watch?v=bjhxSldVjr8">demo video</a></p>
-        <p>A 4×4 systolic array (16 processing elements) that does the matrix multiplies at the heart of an NPU. We took it from design space exploration on FPGA (HLS) to RTL to a finished layout.</p>
+        <p class="meta">ChipMIT's flagship project · with Megh Giri</p>
+        <p>A 4×4 systolic array (16 MAC units) for NPU-style matrix math, taken from FPGA exploration to a finished SkyWater 130 nm layout.</p>
         <ul>
-          <li>Automated flow with Icarus Verilog, Yosys, OpenLane and the SkyWater 130 nm PDK.</li>
-          <li>400 × 400 µm die, 71.43% core utilisation, DRC/LVS clean.</li>
-          <li>2.385 mW at 100 MHz, 1.49 pJ per MAC (TT, 25 °C, 1.8 V).</li>
-          <li>Mapped to a real use case: fast blood cancer (ALL) detection for telemedicine, at 25.1 GMAC/s.</li>
-          <li>Won Silicon Sprint 2025; Special Mention at SYNCHRON'25; 2nd at the BIS ECE case study competition.</li>
+          <li>OpenLane flow: 400 × 400 µm die, 2.385 mW at 100 MHz, 1.49 pJ per MAC.</li>
+          <li>Won Silicon Sprint 2025; Special Mention at SYNCHRON'25.</li>
         </ul>
+        <p class="links"><a href="https://github.com/yashv373/Kalki">GitHub</a> / <a href="https://github.com/yashv373/Logisym-SiliconSprint_NPU_Microcore">Silicon Sprint build</a> / <a href="https://www.youtube.com/watch?v=bjhxSldVjr8">Demo video</a></p>
         <div class="gallery">
           <figure data-p="photos/kalki-layout.jpg"><figcaption>Kalki's layout</figcaption></figure>
-          <figure data-p="photos/kalki-sprint.jpg"><figcaption>Our Silicon Sprint 2025 entry</figcaption></figure>
+          <figure data-p="photos/kalki-sprint.jpg"><figcaption>Silicon Sprint 2025 entry</figcaption></figure>
           <figure data-p="photos/kalki-synchron.jpg"><figcaption>Presenting at SYNCHRON'25</figcaption></figure>
-          <figure data-p="photos/kalki-mela.jpg"><figcaption>ChipMIT stall at Innovation Mela, MES 2026</figcaption></figure>
+          <figure data-p="photos/kalki-mela.jpg"><figcaption>ChipMIT stall at Innovation Mela 2026</figcaption></figure>
         </div>
       </div>
     </div>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="manipal"></span>
+      <img class="lg" src="logos/manipal.png" alt="Manipal Institute of Technology" loading="lazy">
       <div>
         <div class="role-line"><h3>32-bit Brent-Kung adder</h3><span class="when">Jan – Mar 2025</span></div>
-        <p class="meta">VLSI Design Lab · <a href="https://github.com/yashv373/32-Bit-Brent-Kung-Adder">GitHub</a></p>
-        <p>A semicustom design in Cadence (90 nm) compared against RCA, CLA, Kogge-Stone and Han-Carlson adders. 3.78 ns critical path, 43.32 µW, 1223.91 µm². The write-up became an arXiv preprint that others have cited.</p>
+        <p class="meta">VLSI Design Lab</p>
+        <p>Semicustom 90 nm Cadence design compared with four other adders: 3.78 ns, 43 µW, 1224 µm². Became a cited arXiv preprint.</p>
+        <p class="links"><a href="https://github.com/yashv373/32-Bit-Brent-Kung-Adder">GitHub</a> / <a href="https://arxiv.org/abs/2503.18070">arXiv</a></p>
       </div>
     </div>
 
     <h4>Smaller projects</h4>
     <ul class="compact">
-      <li><span class="lc"><img class="lg sm" data-l="github"></span><span>IPMotion<span class="sub">AI pipeline that turns hardware IP concepts into Manim animations.</span></span><span class="when">2026</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="manipal"></span><span>Linear regression for ML-aided chip design<span class="sub">Where a simple linear model works in EDA, and where it breaks. With Chinmay M.</span></span><span class="when">Feb – Mar 2026</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="manipal"></span><span>Line-following, obstacle-avoiding robot<span class="sub">Bare-metal C on an STM32 Nucleo (Arm Cortex-M4). With Bhavesh, Rishi and team.</span></span><span class="when">Sep – Oct 2025</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="chipmit"></span><span>Digit classifier on FPGA with HLS<span class="sub">3-layer MNIST network (97.99% accuracy) turned into C++ with hls4ml, headed to Vivado and Vitis.</span></span><span class="when">Jul 2025</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="manipal"></span><span>5-stage pipelined MIPS processor<span class="sub">Verilog, without hazard handling. With Siddharth and Megh.</span></span><span class="when">Mar – Apr 2025</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="iitbhu"></span><span>CMOS-MTJ XOR/XNOR gate in ngspice<span class="sub">Hybrid spintronic logic with a precharge sense amplifier and MTJ write circuits, built at IIT (BHU).</span></span><span class="when">May – Jun 2024</span></li>
+      <li><img class="lg md" src="logos/github.png" alt="GitHub" loading="lazy"><span><a class="name" href="https://github.com/yashv373/IPMotion">IPMotion</a><span class="sub">Turns hardware IP specs into correct Manim animations.</span></span><span class="when">2026</span></li>
+      <li><img class="lg md" src="logos/manipal.png" alt="Manipal Institute of Technology" loading="lazy"><span><a class="name" href="https://github.com/yashv373/Linear-Regression-for-ML-Chip-Design-Optimization">Linear regression for ML-aided chip design</a><span class="sub">Where a simple linear model works in EDA, and where it breaks.</span></span><span class="when">2026</span></li>
+      <li><img class="lg md" src="logos/manipal.png" alt="Manipal Institute of Technology" loading="lazy"><span><a class="name" href="https://www.linkedin.com/in/yvs373/details/projects/">Line-following, obstacle-avoiding robot</a><span class="sub">Bare-metal C on an STM32 Nucleo (Cortex-M4).</span></span><span class="when">2025</span></li>
+      <li><img class="lg md" src="logos/chipmit.png" alt="ChipMIT" loading="lazy"><span><a class="name" href="https://www.linkedin.com/in/yvs373/details/projects/">Digit classifier on FPGA with HLS</a><span class="sub">MNIST network (97.99% accuracy) converted with hls4ml for Vivado.</span></span><span class="when">2025</span></li>
+      <li><img class="lg md" src="logos/manipal.png" alt="Manipal Institute of Technology" loading="lazy"><span><a class="name" href="https://github.com/yashv373/MIPS-Microprocessor-Pipelined">5-stage pipelined MIPS processor</a><span class="sub">RTL design in Verilog.</span></span><span class="when">2025</span></li>
+      <li><img class="lg md" src="logos/iitbhu.png" alt="IIT (BHU) Varanasi" loading="lazy"><span><a class="name" href="https://github.com/yashv373/CMOS-MTJ-Hybrid-Netlists">CMOS-MTJ XOR/XNOR gate</a><span class="sub">Hybrid spintronic logic netlists in ngspice, built at IIT (BHU).</span></span><span class="when">2024</span></li>
     </ul>
   </section>
 
@@ -438,7 +433,7 @@
     <h2>Experience</h2>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="st"></span>
+      <img class="lg" src="logos/st.png" alt="STMicroelectronics" loading="lazy">
       <div>
         <div class="role-line"><h3>STMicroelectronics</h3><span class="when">Jul 2026 – now</span></div>
         <p class="meta">Digital IP Platform Design Intern · MDRF group, Greater Noida</p>
@@ -447,25 +442,23 @@
     </div>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="manipal"></span>
+      <img class="lg" src="logos/manipal.png" alt="Manipal Institute of Technology" loading="lazy">
       <div>
         <div class="role-line"><h3>Manipal Institute of Technology</h3><span class="when">Aug 2024 – May 2026</span></div>
         <p class="meta">Undergraduate Researcher · with Dr. Prashanth Barla</p>
-        <p>Spintronics-based ASICs. Benchmarked six sense amplifier designs for CMOS-MTJ compute-in-memory in Cadence Virtuoso, with 1000-run Monte Carlo and variation sweeps. This became my first-author JXCDC paper and earned a ₹21,000 research incentive from MAHE. Also explored spintronic hardware for cryptography (a 32-bit hybrid barrel shifter for SHA-256).</p>
+        <p>Spintronics-based ASICs. Benchmarked six sense amplifier designs for CMOS-MTJ compute-in-memory in Cadence Virtuoso, which became my first-author JXCDC paper and earned a ₹21,000 research incentive from MAHE. Also explored spintronic hardware for cryptography.</p>
       </div>
     </div>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="beeprecise"></span>
+      <img class="lg" src="logos/beeprecise.png" alt="BeePrecise" loading="lazy">
       <div>
         <div class="role-line"><h3>Ecosight Technologies (BeePrecise)</h3><span class="when">May – Aug 2025</span></div>
-        <p class="meta">Entrepreneur in Residence (Jul – Aug) · Hardware Intern (May – Jul) · Bangalore</p>
+        <p class="meta">Entrepreneur in Residence · Hardware Intern · Bangalore</p>
         <ul>
-          <li>Designed and verified a custom 4G SIM module board (RF tuning, ESD, antenna layout, level shifting) for the Bee Brood monitoring system.</li>
-          <li>Set up firmware protection on the Nordic nRF52840 (APPROTECT + encrypted DFU).</li>
-          <li>Checked 10+ PCBs for DRC/ERC/DFM, optimised BOMs, and automated panelisation with KiKit.</li>
-          <li>Compared pick-and-place machines for in-house manufacturing and helped build a reflow oven.</li>
-          <li>As EIR: ran technical interviews and helped plan roadmaps for Electronix AI.</li>
+          <li>Designed a custom 4G SIM module board and secured the nRF52840 firmware for the Bee Brood monitoring system.</li>
+          <li>Reviewed 10+ PCBs, optimised BOMs, and helped set up in-house PCB assembly.</li>
+          <li>As EIR, ran technical interviews and planned roadmaps for Electronix AI.</li>
         </ul>
         <div class="gallery">
           <figure data-p="photos/beeprecise-1.jpg"><figcaption>The Ecosight hacker house, Bangalore</figcaption></figure>
@@ -475,7 +468,7 @@
     </div>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="iitbhu"></span>
+      <img class="lg" src="logos/iitbhu.png" alt="IIT (BHU) Varanasi" loading="lazy">
       <div>
         <div class="role-line"><h3>IIT (BHU) Varanasi</h3><span class="when">May – Jun 2024</span></div>
         <p class="meta">Summer Research Intern · with Prof. Shivam Verma and Jagadish Rajpoot</p>
@@ -491,7 +484,7 @@
   <section id="education">
     <h2>Education</h2>
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="manipal"></span>
+      <img class="lg" src="logos/manipal.png" alt="Manipal Institute of Technology" loading="lazy">
       <div>
         <div class="role-line"><h3>Manipal Institute of Technology, Manipal</h3><span class="when">2023 – 2027</span></div>
         <p class="meta">B.Tech in Electronics Engineering (VLSI Design &amp; Technology)</p>
@@ -507,7 +500,7 @@
     <h2>Volunteering &amp; student teams</h2>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="chipmit"></span>
+      <img class="lg" src="logos/chipmit.png" alt="ChipMIT" loading="lazy">
       <div>
         <div class="role-line"><h3>ChipMIT</h3><span class="when">Dec 2024 – now</span></div>
         <p class="meta">Co-founder · President (Apr 2025 – May 2026) · Advisory Board (May 2026 – now) · <a href="https://www.chipmit.in">chipmit.in</a></p>
@@ -531,7 +524,7 @@
     </div>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="tfi"></span>
+      <img class="lg" src="logos/tfi.png" alt="Teach For India" loading="lazy">
       <div>
         <div class="role-line"><h3>Teach For India</h3><span class="when">Jul – Sep 2024</span></div>
         <p class="meta">Volunteer teacher · Ahilya Devi Holkar School, Pune</p>
@@ -540,7 +533,7 @@
     </div>
 
     <div class="entry">
-      <span class="lc"><img class="lg" data-l="loopmit"></span>
+      <img class="lg" src="logos/loopmit.png" alt="loopMIT" loading="lazy">
       <div>
         <div class="role-line"><h3>loopMIT (Hyperloop team)</h3><span class="when">Sep 2023 – Aug 2024</span></div>
         <p class="meta">Electronics Engineer</p>
@@ -553,13 +546,13 @@
 
     <h4>Other roles</h4>
     <ul class="compact">
-      <li><span class="lc"><img class="lg sm" data-l="bis"></span><span>Student Coordinator, ECE Manipal Chapter<span class="sub">Bureau of Indian Standards</span></span><span class="when">Aug 2025 – Jun 2026</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="ecell"></span><span>Associate, then Executive<span class="sub">E-Cell, MIT Manipal. Ran two weekly LinkedIn series and designed for the Manipal Entrepreneurship Summit.</span></span><span class="when">Dec 2023 – Sep 2025</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="iitd"></span><span>Campus Ambassador<span class="sub">Entrepreneurship Development Cell, IIT Delhi</span></span><span class="when">Jan – Feb 2025</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="ieee"></span><span>Managing Committee<span class="sub">IEEE Student Branch Manipal</span></span><span class="when">Sep – Nov 2024</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="unwind"></span><span>Creative Designer<span class="sub">Unwind, designs for mental health awareness</span></span><span class="when">Jul – Oct 2024</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="iee"></span><span>Working Committee<span class="sub">IE-E&amp;C, Manipal Chapter</span></span><span class="when">Dec 2023 – Sep 2024</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="mun"></span><span>Media Head<span class="sub">Model United Nations, MAHE Chapter</span></span><span class="when">Dec 2023 – Mar 2024</span></li>
+      <li><img class="lg md" src="logos/bis.png" alt="Bureau of Indian Standards" loading="lazy"><span><span class="name">Student Coordinator, ECE Manipal Chapter</span><span class="sub">Bureau of Indian Standards</span></span><span class="when">Aug 2025 – Jun 2026</span></li>
+      <li><img class="lg md" src="logos/ecell.png" alt="E-Cell, MIT Manipal" loading="lazy"><span><span class="name">Associate, then Executive</span><span class="sub">E-Cell, MIT Manipal</span></span><span class="when">Dec 2023 – Sep 2025</span></li>
+      <li><img class="lg md" src="logos/iitd.png" alt="IIT Delhi" loading="lazy"><span><span class="name">Campus Ambassador</span><span class="sub">Entrepreneurship Development Cell, IIT Delhi</span></span><span class="when">Jan – Feb 2025</span></li>
+      <li><img class="lg md" src="logos/ieeesb.png" alt="IEEE Student Branch Manipal" loading="lazy"><span><span class="name">Managing Committee</span><span class="sub">IEEE Student Branch Manipal</span></span><span class="when">Sep – Nov 2024</span></li>
+      <li><img class="lg md" src="logos/unwind.png" alt="Unwind" loading="lazy"><span><span class="name">Creative Designer</span><span class="sub">Unwind, mental health awareness</span></span><span class="when">Jul – Oct 2024</span></li>
+      <li><img class="lg md" src="logos/iee.png" alt="IE-E&amp;C, Manipal Chapter" loading="lazy"><span><span class="name">Working Committee</span><span class="sub">IE-E&amp;C, Manipal Chapter</span></span><span class="when">Dec 2023 – Sep 2024</span></li>
+      <li><img class="lg md" src="logos/mun.png" alt="Model United Nations" loading="lazy"><span><span class="name">Media Head</span><span class="sub">Model United Nations, MAHE Chapter</span></span><span class="when">Dec 2023 – Mar 2024</span></li>
     </ul>
   </section>
 
@@ -567,13 +560,13 @@
   <section id="honors">
     <h2>Honors &amp; fellowships</h2>
     <ul class="compact">
-      <li><span class="lc"><img class="lg sm" data-l="sscs"></span><span>Tapeout approval, 2nd in proposal round<span class="sub">IEEE SSCS PICO Chipathon 2026</span></span><span class="when">2026</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="mahe"></span><span>Research incentive (₹21,000)<span class="sub">MAHE Directorate of Research</span></span><span class="when">2026</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="vlsid"></span><span>Local Fellowship<span class="sub">VLSID 2026, VLSI Society of India</span></span><span class="when">Jan 2026</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="tenstorrent"><img class="lg sm" data-l="nitk"><img class="lg sm" data-l="rvce"></span><span>Winner, Digital Theme 1<span class="sub">Silicon Sprint 2025 (IEEE NITK, IEEE RVCE, Tenstorrent)</span></span><span class="when">Nov 2025</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="manipal"></span><span>Special Mention, and 2nd place<span class="sub">SYNCHRON'25, and BIS ECE case study competition</span></span><span class="when">Nov 2025</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="samsung"></span><span>Samsung Fellowship, Cohort 5<span class="sub">ISWDP by IISc, Synopsys and Samsung Semiconductor</span></span><span class="when">2025</span></li>
-      <li><span class="lc"><img class="lg sm" data-l="techtatva"></span><span>Best Hack (₹10,000)<span class="sub">M# Manipal Hackathon 2024, 408 teams</span></span><span class="when">Oct 2024</span></li>
+      <li><img class="lg md" src="logos/sscs.png" alt="IEEE Solid-State Circuits Society" loading="lazy"><span><span class="name">Tapeout approval, 2nd in proposal round</span><span class="sub">IEEE SSCS PICO Chipathon 2026</span></span><span class="when">2026</span></li>
+      <li><img class="lg md" src="logos/mahe.png" alt="MAHE" loading="lazy"><span><span class="name">Research incentive (₹21,000)</span><span class="sub">MAHE Directorate of Research</span></span><span class="when">2026</span></li>
+      <li><img class="lg md" src="logos/vlsid.png" alt="VLSI Society of India" loading="lazy"><span><span class="name">Local Fellowship</span><span class="sub">VLSID 2026, VLSI Society of India</span></span><span class="when">Jan 2026</span></li>
+      <li><img class="lg md" src="logos/nitk.png" alt="NIT Karnataka" loading="lazy"><span><span class="name">Winner, Digital Theme 1</span><span class="sub">Silicon Sprint 2025 (IEEE NITK, IEEE RVCE, Tenstorrent)</span></span><span class="when">Nov 2025</span></li>
+      <li><img class="lg md" src="logos/chipmit.png" alt="ChipMIT" loading="lazy"><span><span class="name">Special Mention, and 2nd place</span><span class="sub">SYNCHRON'25, and BIS ECE case study competition</span></span><span class="when">Nov 2025</span></li>
+      <li><img class="lg md" src="logos/iswdp.png" alt="ISWDP (IISc, Synopsys, Samsung)" loading="lazy"><span><span class="name">Samsung Fellowship, Cohort 5</span><span class="sub">ISWDP by IISc, Synopsys and Samsung Semiconductor</span></span><span class="when">2025</span></li>
+      <li><img class="lg md" src="logos/techtatva.png" alt="TechTatva, MIT Manipal" loading="lazy"><span><span class="name">Best Hack (₹10,000)</span><span class="sub">M# Manipal Hackathon 2024, 408 teams</span></span><span class="when">Oct 2024</span></li>
     </ul>
   </section>
 
@@ -585,59 +578,19 @@
   <footer>Yashvardhan Singh. Last updated October 2026.</footer>
 </main>
 
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <span class="lb-count" id="lb-count"></span>
+  <button class="lb-close" id="lb-close" aria-label="Close">×</button>
+  <button class="lb-prev" id="lb-prev" aria-label="Previous photo">‹</button>
+  <figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
+  <button class="lb-next" id="lb-next" aria-label="Next photo">›</button>
+</div>
+
 <script>
-  /* ---------- logos ----------
-     slug: [name, website domain or null]
-     Put a file at logos/<slug>.png to use your own logo (recommended).
-     If it's missing and a domain is given, the site's icon is used instead. */
-  var LOGOS = {
-    st:          ['STMicroelectronics', 'st.com'],
-    manipal:     ['Manipal Institute of Technology', 'manipal.edu'],
-    mahe:        ['MAHE', 'manipal.edu'],
-    iitbhu:      ['IIT (BHU) Varanasi', 'iitbhu.ac.in'],
-    iitd:        ['IIT Delhi', 'iitd.ac.in'],
-    iisc:        ['IISc Bangalore', 'iisc.ac.in'],
-    beeprecise:  ['BeePrecise', null],
-    chipmit:     ['ChipMIT', 'chipmit.in'],
-    loopmit:     ['loopMIT', null],
-    tfi:         ['Teach For India', 'teachforindia.org'],
-    bis:         ['Bureau of Indian Standards', 'bis.gov.in'],
-    ecell:       ['E-Cell, MIT Manipal', null],
-    ieee:        ['IEEE', 'ieee.org'],
-    sscs:        ['IEEE Solid-State Circuits Society', 'sscs.ieee.org'],
-    jxcdc:       ['IEEE JXCDC', 'ieee.org'],
-    gf:          ['GlobalFoundries', 'gf.com'],
-    arxiv:       ['arXiv', 'arxiv.org'],
-    ssrn:        ['SSRN', 'ssrn.com'],
-    rsq:         ['Research Square', 'researchsquare.com'],
-    semi:        ['SEMI / SEMICON India', 'semi.org'],
-    vlsid:       ['VLSID / VLSI Society of India', null],
-    tenstorrent: ['Tenstorrent', 'tenstorrent.com'],
-    nitk:        ['NIT Karnataka', 'nitk.ac.in'],
-    rvce:        ['RV College of Engineering', 'rvce.edu.in'],
-    marvell:     ['Marvell', 'marvell.com'],
-    samsung:     ['Samsung Semiconductor', 'samsung.com'],
-    synopsys:    ['Synopsys', 'synopsys.com'],
-    techtatva:   ['TechTatva, MIT Manipal', null],
-    unwind:      ['Unwind', null],
-    mun:         ['MAHE Model United Nations', null],
-    iee:         ['IE-E&C, Manipal Chapter', null],
-    github:      ['GitHub', 'github.com']
-  };
-  document.querySelectorAll('img.lg[data-l]').forEach(function (img) {
-    var info = LOGOS[img.dataset.l] || [img.dataset.l, null];
-    img.alt = info[0];
-    img.title = info[0];
-    img.loading = 'lazy';
-    img.onerror = function () {
-      if (info[1] && !img.dataset.tried) {
-        img.dataset.tried = '1';
-        img.src = 'https://www.google.com/s2/favicons?domain=' + info[1] + '&sz=128';
-      } else {
-        img.classList.add('missing');
-      }
-    };
-    img.src = 'logos/' + img.dataset.l + '.png';
+  /* ---------- logos: hide any tile whose file is missing ---------- */
+  document.querySelectorAll('img.lg').forEach(function (img) {
+    if (img.complete && img.naturalWidth === 0) img.classList.add('missing');
+    img.addEventListener('error', function () { img.classList.add('missing'); });
   });
 
   /* ---------- photos ---------- */
@@ -650,7 +603,7 @@
     var src = fig.dataset.p;
     var cap = fig.querySelector('figcaption');
     var a = document.createElement('a');
-    a.href = src; a.target = '_blank'; a.rel = 'noopener';
+    a.href = src;
     var img = document.createElement('img');
     img.alt = (cap ? cap.textContent + ' | ' : '') + 'Yashvardhan Singh';
     img.loading = 'lazy';
@@ -659,6 +612,42 @@
     a.appendChild(img);
     fig.insertBefore(a, cap);
   });
+
+  /* ---------- photo viewer ---------- */
+  (function () {
+    var lb = document.getElementById('lb'), lbImg = document.getElementById('lb-img');
+    var lbCap = document.getElementById('lb-cap'), lbCount = document.getElementById('lb-count');
+    var set = [], i = 0, opener = null;
+    function show() {
+      var f = set[i], img = f.querySelector('img'), cap = f.querySelector('figcaption');
+      lbImg.src = img.src; lbImg.alt = img.alt;
+      lbCap.textContent = cap ? cap.textContent : '';
+      lbCount.textContent = set.length > 1 ? (i + 1) + ' / ' + set.length : '';
+      document.getElementById('lb-prev').hidden = document.getElementById('lb-next').hidden = set.length < 2;
+    }
+    function open(fig) {
+      set = Array.prototype.slice.call(fig.parentElement.querySelectorAll('figure'));
+      i = set.indexOf(fig); opener = fig.querySelector('a');
+      show(); lb.hidden = false; document.body.style.overflow = 'hidden';
+      document.getElementById('lb-close').focus();
+    }
+    function close() { lb.hidden = true; document.body.style.overflow = ''; if (opener) opener.focus(); }
+    function step(d) { i = (i + d + set.length) % set.length; show(); }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('.gallery a');
+      if (a) { e.preventDefault(); open(a.closest('figure')); }
+    });
+    document.getElementById('lb-close').onclick = close;
+    document.getElementById('lb-prev').onclick = function () { step(-1); };
+    document.getElementById('lb-next').onclick = function () { step(1); };
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
+    });
+  })();
 
   /* ---------- the cell-row strip ---------- */
   (function () {
@@ -678,7 +667,7 @@
         rect.setAttribute('x', x); rect.setAttribute('y', y);
         rect.setAttribute('width', Math.max(w - 1.5, 1)); rect.setAttribute('height', rowH);
         rect.setAttribute('fill', styles.getPropertyValue(layers[Math.floor(rand() * layers.length)]).trim());
-        rect.setAttribute('opacity', (0.35 + rand() * 0.4).toFixed(2));
+        rect.setAttribute('opacity', (0.45 + rand() * 0.4).toFixed(2));
         svg.appendChild(rect);
         if (rand() < 0.12) {
           var via = document.createElementNS(ns, 'rect');
