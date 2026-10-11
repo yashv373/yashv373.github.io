@@ -40,7 +40,7 @@
 <p>New data must not arrive <i>too early</i> and overwrite the value being captured on the same edge:</p>
 <p>$$t_{cq} + t_{logic,min} \ge t_h + t_{skew}$$</p>
 <p>Hold does not depend on the clock period, so slowing the clock never fixes a hold violation. The usual fix is adding delay (buffers) on the short path.</p>
-<blockquote><p>Here $t_{skew}$ = capture clock arrival time minus launch clock arrival time.</p></blockquote></div><div class="nt-back"><h4>Linked from</h4><ul><li><a href="#start-here">Start here</a></li><li><a href="#clock-domain-crossing">Clock domain crossing</a></li><li><a href="#systolic-arrays">Systolic arrays</a></li></ul></div></article>
+<blockquote><p>Here $t_{skew}$ = capture clock arrival time minus launch clock arrival time.</p></blockquote></div><div class="nt-back"><h4>Linked from</h4><ul><li><a href="#start-here">Start here</a></li><li><a href="#clock-domain-crossing">Clock domain crossing</a></li></ul></div></article>
 <article class="nt-view" id="n-clock-domain-crossing" hidden><p class="nt-path">03 RTL Design &rsaquo; Clocking</p><h1>Clock domain crossing</h1><p class="nt-meta">Updated 11 Oct 2026 &nbsp;<span class="nt-tag">cdc</span><span class="nt-tag">metastability</span></p><div class="nt-body"><p>A clock domain crossing (CDC) happens when a signal made on one clock is read by flops on a different, unrelated clock. The two clocks' edges have no fixed relationship, so sometimes the receiving flop samples the signal right while it changes. That breaks <a class="wl" href="#setup-and-hold-time">Setup and hold time</a> and the flop goes <b>metastable</b>.</p>
 <h2>Single-bit signals</h2>
 <p>Use a <b>two-flop synchronizer</b>: two flops in a row on the destination clock. The first one may go metastable, but it gets a full clock cycle to settle before the second one samples it.</p>
@@ -50,16 +50,11 @@
 <table><thead><tr><th>Situation</th><th>Approach</th></tr></thead><tbody><tr><td>Counter or pointer</td><td>Gray code first, then sync (only one bit changes at a time)</td></tr><tr><td>Data bus</td><td>Handshake (req/ack) or a synced enable</td></tr><tr><td>Stream of data</td><td>Asynchronous FIFO with Gray-coded pointers</td></tr></tbody></table>
 <h2>Checking it</h2>
 <p>Normal simulation rarely catches CDC bugs. Structural CDC tools look at the design and flag every crossing that has no proper synchronizer.</p></div><div class="nt-back"><h4>Linked from</h4><ul><li><a href="#start-here">Start here</a></li><li><a href="#setup-and-hold-time">Setup and hold time</a></li></ul></div></article>
-<article class="nt-view" id="n-systolic-arrays" hidden><p class="nt-path">02 Architecture &rsaquo; Accelerators</p><h1>Systolic arrays</h1><p class="nt-meta">Updated 11 Oct 2026 &nbsp;<span class="nt-tag">ai hardware</span></p><div class="nt-body"><p>A systolic array is a grid of small, identical processing elements (PEs). Each PE does a multiply-accumulate (MAC) and passes data to its neighbours every clock cycle, like a heartbeat pumping data through the grid. That's where the name comes from.</p>
-<h2>Why it's fast</h2>
-<ul><li>Each value read from memory gets reused many times as it travels across the array.</li><li>PEs only talk to their neighbours, so wires stay short and timing is easier to close (see <a class="wl" href="#setup-and-hold-time">Setup and hold time</a>).</li><li>An N×N array does N² MACs every cycle once it's full.</li></ul>
-<h2>Dataflows</h2>
-<table><thead><tr><th>Dataflow</th><th>What stays put in each PE</th></tr></thead><tbody><tr><td>Weight stationary</td><td>Weights</td></tr><tr><td>Output stationary</td><td>Partial sums</td></tr><tr><td>Input stationary</td><td>Input activations</td></tr></tbody></table>
-<p>The catch is fill and drain time: the array needs roughly 2N cycles before every PE is busy, so small matrices waste some of it.</p>
+<article class="nt-view" id="n-systolic-arrays" hidden><p class="nt-path">02 Architecture &rsaquo; Accelerators</p><h1>Systolic arrays</h1><p class="nt-meta">Updated 11 Oct 2026 &nbsp;<span class="nt-tag">ai hardware</span></p><div class="nt-body"><p>A systolic array is a grid of small, identical processing elements (PEs). Each PE does a multiply-accumulate (MAC) and passes data to its neighbours every clock cycle, like a heartbeat pumping data through the grid. That's where the name comes from. The original roots stem from H T Kung's paper on Systolics, who is the same person who was involved in Brent-Kung adders.</p>
 <p>I built a 4×4 one in <a href="./#projects">Project Kalki</a>.</p></div></article>
 </div></main>
 </div>
-<script>window.NT_GRAPH = {"nodes":[{"s":"start-here","t":"Start here","f":0},{"s":"setup-and-hold-time","t":"Setup and hold time","f":3},{"s":"clock-domain-crossing","t":"Clock domain crossing","f":2},{"s":"systolic-arrays","t":"Systolic arrays","f":1}],"links":[[0,1],[0,2],[1,2],[3,1]]};</script>
+<script>window.NT_GRAPH = {"nodes":[{"s":"start-here","t":"Start here","f":0},{"s":"setup-and-hold-time","t":"Setup and hold time","f":3},{"s":"clock-domain-crossing","t":"Clock domain crossing","f":2},{"s":"systolic-arrays","t":"Systolic arrays","f":1}],"links":[[0,1],[0,2],[1,2]]};</script>
 <script src="notes.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="window.ntMath && window.ntMath()"></script>
