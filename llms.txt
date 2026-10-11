@@ -73,7 +73,7 @@ Google Scholar: https://scholar.google.com/citations?user=YZYt6oYAAAAJ&hl=en
 - Nov 2025: Project Kalki got a Special Mention at SYNCHRON'25 and 2nd place at the BIS ECE case study competition.
 
 ## Notes (https://yashv373.github.io/notes.html)
-- Intro to Photonics [07 Post CMOS / Photonics]: https://yashv373.github.io/notes.html#intro-to-photonics
+- Intro to Photonics [06 Post CMOS / Photonics]: https://yashv373.github.io/notes.html#intro-to-photonics
 - Start here [00 Start]: https://yashv373.github.io/notes.html#start-here
 - Setup and hold time [05 Timing]: https://yashv373.github.io/notes.html#setup-and-hold-time
 - Clock domain crossing [03 RTL Design / Clocking]: https://yashv373.github.io/notes.html#clock-domain-crossing
