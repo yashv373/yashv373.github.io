@@ -1,3 +1,18 @@
+/* email link: assembled here so spam bots can't read it from the page */
+document.querySelectorAll('a.em').forEach(function (a) {
+  a.href = 'mailto:' + a.dataset.u + '@' + a.dataset.d;
+});
+
+/* visitor count in the footer (GoatCounter) */
+(function () {
+  var el = document.getElementById('visits');
+  if (!el) return;
+  fetch('https://' + el.dataset.gc + '.goatcounter.com/counter/TOTAL.json')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { if (j && j.count) el.textContent = j.count + ' visits'; })
+    .catch(function () {});
+})();
+
 /* logos: hide any tile whose file is missing */
 document.querySelectorAll('img.lg').forEach(function (img) {
   if (img.complete && img.naturalWidth === 0) img.classList.add('missing');

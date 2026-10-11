@@ -110,7 +110,7 @@
     {key: 'otherRoles', label: 'Other roles', fields: COMPACT},
     {key: 'honors', label: 'Honors & fellowships', fields: COMPACT},
     {key: 'outAndAbout', label: 'Out and about photos', text: 'Photos (one per line: photos/file.jpg | caption)'},
-    {key: 'profile', label: 'Profile, bio & links', single: [['name', 'Name', ''], ['bio', 'Bio (leave a blank line between paragraphs)', '', 1], ['email', 'Email', ''], ['github', 'GitHub link', ''], ['scholar', 'Google Scholar link', ''], ['linkedin', 'LinkedIn link', ''], ['cv', 'CV link (optional)', 'e.g. cv.pdf'], ['updated', '"Last updated" text', 'e.g. November 2026'], ['before', '"Before chips" paragraph', '', 1]]}
+    {key: 'profile', label: 'Profile, bio & links', single: [['name', 'Name', ''], ['bio', 'Bio (leave a blank line between paragraphs)', '', 1], ['email', 'Email', ''], ['github', 'GitHub link', ''], ['scholar', 'Google Scholar link', ''], ['linkedin', 'LinkedIn link', ''], ['cv', 'CV link (optional)', 'e.g. cv.pdf'], ['updated', '"Last updated" text', 'e.g. November 2026'], ['goatcounter', 'GoatCounter code for visitor stats (optional)', 'e.g. yashv373'], ['before', '"Before chips" paragraph', '', 1]]}
   ];
   var $ = function (id) { return document.getElementById(id); };
   var data = null, dirty = false, token = localStorage.getItem('ys_token') || '';
@@ -242,6 +242,8 @@
     status('Publishing…');
     put('content.json', toB64(JSON.stringify(d, null, 2) + '\n'), 'Update content (website editor)')
       .then(function () { return put('index.html', toB64(YSBuild.page(d)), 'Rebuild page (website editor)'); })
+      .then(function () { return put('llms.txt', toB64(YSBuild.llms(d)), 'Refresh llms.txt (website editor)'); })
+      .then(function () { return put('sitemap.xml', toB64(YSBuild.sitemap(d, new Date().toISOString().slice(0, 10))), 'Refresh sitemap (website editor)'); })
       .then(function () { dirty = false; status('Published! Live in about a minute.', 'ok'); })
       .catch(function (e) { status('Publish failed: ' + e.message, 'err'); });
   };

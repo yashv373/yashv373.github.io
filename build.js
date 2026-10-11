@@ -104,7 +104,7 @@
     var graph = [
       {'@type': 'ProfilePage', '@id': SITE + '#page', url: SITE, name: d.profile.name, mainEntity: {'@id': me}},
       {'@type': 'Person', '@id': me, name: d.profile.name, givenName: 'Yashvardhan', familyName: 'Singh', url: SITE,
-        image: SITE + 'photo.jpg', email: 'mailto:' + d.profile.email, jobTitle: 'Digital Integrated Circuit Design Engineer',
+        image: SITE + 'photo.jpg', jobTitle: 'Digital Integrated Circuit Design Engineer',
         description: 'Digital integrated circuit design engineer working on hardware acceleration, digital ASIC design, open-source silicon, machine learning for EDA and spintronics (CMOS-MTJ).',
         worksFor: {'@type': 'Organization', name: 'STMicroelectronics', url: 'https://www.st.com'},
         alumniOf: {'@type': 'CollegeOrUniversity', name: 'Manipal Institute of Technology, Manipal'},
@@ -128,9 +128,11 @@
     var P = d.profile;
     var title = P.name + ' | Digital IC Design Engineer';
     var desc = P.name + ' is a digital integrated circuit design engineer working on hardware accelerators, ASIC design and open-source silicon. MIT Manipal, STMicroelectronics, co-founder of ChipMIT.';
-    var contact = [['email', 'mailto:' + P.email], ['github', P.github], ['google scholar', P.scholar], ['linkedin', P.linkedin], ['cv', P.cv]]
-      .filter(function (x) { return x[1] && x[1] !== 'mailto:'; })
-      .map(function (x) { return '<a href="' + esc(x[1]) + '">' + x[0] + '</a>'; }).join(' / ');
+    var em = String(P.email || '').split('@');
+    var contact = (em.length === 2 ? ['<a class="em" href="#" data-u="' + esc(em[0]) + '" data-d="' + esc(em[1]) + '">email</a>'] : []).concat(
+      [['github', P.github], ['google scholar', P.scholar], ['linkedin', P.linkedin], ['cv', P.cv]]
+      .filter(function (x) { return x[1]; })
+      .map(function (x) { return '<a href="' + esc(x[1]) + '">' + x[0] + '</a>'; })).join(' / ');
     var bio = String(P.bio || '').split(/\n\s*\n/).map(function (p) { return '<p>' + inline(p.trim()) + '</p>'; }).join('\n');
     var h = [];
     h.push('<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="color-scheme" content="light">');
@@ -170,12 +172,45 @@
     var oa = gallery(d.outAndAbout);
     if (oa) h.push('<div class="photoblock"><h4>Out and about</h4>' + oa + '</div>');
     h.push('</section>');
-    h.push('\n<footer>' + badge('badge') + '<div><a class="admin-link" href="admin.html">' + esc(P.name) + '</a><br>Last updated ' + esc(P.updated) + '.</div><p class="sig" role="img" aria-label="Signature: ' + esc(P.name) + '"><span>Yashvardhan</span><span>Singh</span></p></footer>\n</main>');
+    h.push('\n<footer>' + badge('badge') + '<div><a class="admin-link" href="admin.html">' + esc(P.name) + '</a><br>Last updated ' + esc(P.updated) + '.' + (P.goatcounter ? '<br><span id="visits" data-gc="' + esc(P.goatcounter) + '"></span>' : '') + '</div><p class="sig" role="img" aria-label="Signature: ' + esc(P.name) + '"><span>Yashvardhan</span><span>Singh</span></p></footer>\n</main>');
     h.push('<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer"><span class="lb-count" id="lb-count"></span><button class="lb-close" id="lb-close" aria-label="Close">&times;</button><button class="lb-prev" id="lb-prev" aria-label="Previous photo">&lsaquo;</button><figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure><button class="lb-next" id="lb-next" aria-label="Next photo">&rsaquo;</button></div>');
-    h.push('<script src="site.js"></script>\n</body>\n</html>\n');
+    h.push('<script src="site.js"></script>');
+    if (P.goatcounter) h.push('<script data-goatcounter="https://' + esc(P.goatcounter) + '.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>');
+    h.push('</body>\n</html>\n');
     return h.join('\n');
   }
 
-  var api = {page: page, badge: badge, favicon: favicon, names: NAMES};
+  function plain(s) { return String(s || '').replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, t, u) { return u.charAt(0) === '#' ? t : t + ' (' + u + ')'; }).replace(/\*\*/g, ''); }
+  function llms(d) {
+    var P = d.profile, o = [], em = String(P.email || '').split('@');
+    o.push('# ' + P.name, '');
+    o.push('> ' + plain(String(P.bio || '').replace(/\s*\n\s*\n\s*/g, ' ')), '');
+    o.push('Homepage: ' + SITE);
+    if (em.length === 2) o.push('Email: ' + em[0] + ' [at] ' + em[1]);
+    [['LinkedIn', P.linkedin], ['GitHub', P.github], ['Google Scholar', P.scholar]].forEach(function (x) { if (x[1]) o.push(x[0] + ': ' + x[1]); });
+    function block(title, list, fn) { if (!list || !list.length) return; o.push('', '## ' + title); list.forEach(function (x) { o.push('- ' + fn(x)); }); }
+    function ent(e) { return [e.title, e.dates, e.meta].filter(Boolean).map(plain).join(', ') + (e.text ? '. ' + plain(lines(e.text).join(' ')) : '') + (lines(e.bullets).length ? ' ' + lines(e.bullets).map(plain).join(' ') : ''); }
+    block('Experience', d.experience, ent);
+    block('Publications', d.publications, function (p) { return p.title + '. ' + p.authors + '. ' + p.venue + (p.tag ? ' (' + p.tag + ')' : '') + '.' + (p.link ? ' ' + p.link : '') + (p.summary ? ' ' + plain(p.summary) : ''); });
+    block('Projects', d.projects, ent);
+    block('Smaller projects', d.smallProjects, function (c) { return plain(c.title) + ' (' + c.when + '): ' + plain(c.sub) + (c.link ? ' ' + c.link : ''); });
+    block('Education', d.education, ent);
+    block('Volunteering and student teams', d.volunteering, ent);
+    block('Other roles', d.otherRoles, function (c) { return plain(c.title) + ', ' + plain(c.sub) + ' (' + c.when + ')'; });
+    block('Honors', d.honors, function (c) { return plain(c.title) + ', ' + plain(c.sub) + ' (' + c.when + ')'; });
+    block('Recent news', (d.news || []).slice(0, 10), function (n) { return n.date + ': ' + plain(n.text); });
+    o.push('', 'Note: other people share the name ' + P.name + '. This page is about the digital IC / chip design engineer from MIT Manipal and STMicroelectronics.', '');
+    return o.join('\n');
+  }
+  function sitemap(d, day) {
+    var imgs = ['photo.jpg'];
+    [d.outAndAbout].concat((d.projects || []).concat(d.experience || [], d.volunteering || []).map(function (e) { return e.photos; }))
+      .forEach(function (s) { pairs(s).forEach(function (x) { imgs.push(x[0]); }); });
+    return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n  <url>\n    <loc>' + SITE + '</loc>\n    <lastmod>' + day + '</lastmod>\n' +
+      imgs.map(function (p) { return '    <image:image><image:loc>' + SITE + esc(p) + '</image:loc></image:image>'; }).join('\n') +
+      '\n  </url>\n  <url>\n    <loc>' + SITE + 'llms.txt</loc>\n    <lastmod>' + day + '</lastmod>\n  </url>\n</urlset>\n';
+  }
+
+  var api = {page: page, badge: badge, favicon: favicon, llms: llms, sitemap: sitemap, names: NAMES};
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.YSBuild = api;
 })(this);
