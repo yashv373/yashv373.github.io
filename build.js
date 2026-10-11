@@ -3,6 +3,8 @@
   var SITE = 'https://yashv373.github.io/';
   var MONO_DARK = 'M0.5 99 0.5 110.5 12 122 88.5 122 100 110.5 100 90 89 79 45 79 45 93.5 84 94 85.5 95.5 85.5 105 85 106 83 107 17.5 107 15 105 15 99ZM65 65.5 83.5 65.5 85.5 67.5 85.5 73.5 100 73.5 100 62 88.5 50.5 79.5 50.5ZM24.5 50.5 12 50.5 0.5 62.5 0.5 82 12 93.5 24.5 93.5 24.5 79 17.5 79 15 76.5 15.5 66 17 65.5 24.5 65.5ZM91.5 0 70.5 0 27.5 43 27.5 104 42.5 104 42.5 49.5ZM0 0 33 33.5 43.5 23 21 0Z';
   var MONO_ORANGE = 'M94 32 77 32 55 53.5 54.5 41 45 50.5 45.5 66 52.5 73.5Z';
+  var CHIP = '<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="10" y="10" width="20" height="20" rx="2"/><rect x="15" y="15" width="10" height="10"/><path d="M14 5v5M18 5v5M22 5v5M26 5v5M14 30v5M18 30v5M22 30v5M26 30v5M5 14h5M5 18h5M5 22h5M5 26h5M30 14h5M30 18h5M30 22h5M30 26h5"/></svg>';
+  var WAFER = '<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M16 34.2A15 15 0 1 1 24 34.2Z"/><path stroke-width="0.8" d="M11 14h18M11 20h18M11 26h18M14 11v18M20 8v24M26 11v18"/></svg>';
   var NAMES = {st: 'STMicroelectronics', chipmit: 'ChipMIT', manipal: 'Manipal Institute of Technology', mahe: 'MAHE', beeprecise: 'BeePrecise', loopmit: 'loopMIT', iitbhu: 'IIT (BHU) Varanasi', iitd: 'IIT Delhi', tfi: 'Teach For India', bis: 'Bureau of Indian Standards', ecell: 'E-Cell, MIT Manipal', unwind: 'Unwind', mun: 'Model United Nations', ieee: 'IEEE', ieeesb: 'IEEE Student Branch Manipal', iee: 'IE-E&C, Manipal Chapter', vlsid: 'VLSI Society of India', iswdp: 'ISWDP (IISc, Synopsys, Samsung)', samsung: 'Samsung Semiconductor', sscs: 'IEEE Solid-State Circuits Society', gf: 'GlobalFoundries', arxiv: 'arXiv', rsq: 'Research Square', ssrn: 'SSRN (Elsevier)', jxcdc: 'IEEE JXCDC', semi: 'SEMI', marvell: 'Marvell Technology', nitk: 'NIT Karnataka', rvce: 'RV College of Engineering', iisc: 'IISc Bangalore', synopsys: 'Synopsys', techtatva: 'TechTatva, MIT Manipal', github: 'GitHub'};
 
   function esc(s) {
@@ -161,8 +163,8 @@
     if (P.before) h.push('\n<section id="before">\n<h2>Before chips</h2>\n<p>' + inline(P.before) + '</p>\n</section>');
 
     h.push('\n<section id="news">\n<h2>News</h2>\n<div class="paper">');
-    h.push('<div class="paper-top"><div class="ear">All the Silicon That\'s Fit to Print</div><p class="masthead">The Yashvardhan Times</p><div class="ear right">Late Edition<br>' + esc(P.updated) + '</div></div>');
-    h.push('<div class="paper-bar"><span>Vol. III</span><span>Manipal &middot; Greater Noida &middot; New Delhi</span><span>&#8377;0.00</span></div>');
+    h.push('<div class="paper-top"><div class="ear" aria-hidden="true">' + CHIP + '</div><p class="masthead">The Yashvardhan Times</p><div class="ear right" aria-hidden="true">' + WAFER + '</div></div>');
+    h.push('<div class="paper-bar"></div>');
     h.push('<ul class="stories" tabindex="0" aria-label="News">\n' + (d.news || []).map(story).join('') + '</ul>');
     h.push('<div class="paper-foot">Scroll for earlier editions</div>\n</div>');
     var oa = gallery(d.outAndAbout);
