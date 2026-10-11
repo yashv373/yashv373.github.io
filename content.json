@@ -438,7 +438,7 @@
   "notes": [
     {
       "title": "Intro to Photonics",
-      "folder": "07 Post CMOS / Photonics",
+      "folder": "06 Post CMOS / Photonics",
       "tags": "light, photons",
       "body": "## Photonics\n\nRay optics --> Wave Optics --> EM Waves --> Quantum Mechanics ( Photonics )\n\nExploit the speed of light for data travel purposes, since in the modern era, most of the time goes in data travel, not processing or compute.",
       "updated": "2026-10-11"
