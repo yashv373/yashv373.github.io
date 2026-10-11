@@ -65,6 +65,7 @@
     <select id="section" aria-label="Section"></select>
     <button id="add">+ Add new entry</button>
     <button id="preview">Preview</button>
+    <button id="preview-notes">Preview notes</button>
     <button id="publish" class="primary">Publish to website</button>
     <span id="status"></span>
     <a href="./" target="_blank" rel="noopener">Open website</a>
@@ -101,6 +102,7 @@
   var COMPACT = [['title', 'Title', 'e.g. Best Paper Award'], ['sub', 'Second line', 'e.g. IEEE Conference 2027'], ['when', 'Date or year', 'e.g. 2027'], ['link', 'Link (optional)', 'https://...'], ['logo', 'Logo name', 'e.g. ieee']];
   var SECTIONS = [
     {key: 'news', label: 'News', fields: [['date', 'Date', 'e.g. Oct 2026'], ['text', 'What happened (one or two lines)', 'e.g. Joined Intel as a design verification intern.', 1], ['logo', 'Logo name', 'e.g. st']]},
+    {key: 'notes', label: 'Notes (my notes page)', fields: [['title', 'Note title', 'e.g. Setup and hold time'], ['folder', 'Folder (use / for subfolders)', 'e.g. 03 RTL Design / Clocking'], ['tags', 'Tags (optional, comma separated)', 'e.g. timing, sta'], ['body', 'Note text (Markdown)', '## Heading\n**bold**, *italic*, - list, `code`\n[[Another note]] links to a note\n$math$ or $$big math$$\n```\ncode block\n```', 2]]},
     {key: 'publications', label: 'Publications', fields: [['title', 'Paper title', ''], ['link', 'Link to paper', 'https://...'], ['authors', 'Authors', 'e.g. Yashvardhan Singh and Megh Giri'], ['venue', 'Journal / conference, year', 'e.g. IEEE JXCDC, 2026'], ['date', 'Publish date (optional, YYYY-MM-DD)', 'e.g. 2026-05-02'], ['tag', 'Tag (optional)', 'e.g. under review'], ['summary', 'Short summary (2–3 lines)', '', 1], ['links', 'Links (one per line: Label | URL)', 'arXiv | https://arxiv.org/...', 1], ['logo', 'Logo name', 'e.g. ieee']]},
     {key: 'projects', label: 'Projects (big)', fields: ENTRY},
     {key: 'smallProjects', label: 'Smaller projects', fields: COMPACT},
@@ -181,8 +183,9 @@
     var lab = document.createElement('label'); lab.textContent = f[1];
     var inp = document.createElement(f[3] ? 'textarea' : 'input');
     if (!f[3]) inp.type = 'text';
+    if (f[3] === 2) { inp.rows = 22; inp.style.fontFamily = 'Consolas, monospace'; inp.style.fontSize = '14px'; }
     inp.placeholder = f[2] || ''; inp.value = obj[f[0]] || '';
-    inp.oninput = function () { obj[f[0]] = inp.value; changed(); var t = wrap.closest('details'); if (t && f[0] === titleKey()) t.querySelector('summary b').textContent = inp.value || '(new entry)'; };
+    inp.oninput = function () { obj[f[0]] = inp.value; if (sec().key === 'notes') obj.updated = new Date().toISOString().slice(0, 10); changed(); var t = wrap.closest('details'); if (t && f[0] === titleKey()) t.querySelector('summary b').textContent = inp.value || '(new entry)'; };
     wrap.appendChild(lab); wrap.appendChild(inp);
     return wrap;
   }
@@ -237,11 +240,16 @@
     var html = YSBuild.page(clean()).replace('<head>', '<head><base href="https://yashv373.github.io/">');
     var w = window.open('', '_blank'); w.document.open(); w.document.write(html); w.document.close();
   };
+  $('preview-notes').onclick = function () {
+    var html = YSBuild.notes(clean()).replace('<head>', '<head><base href="https://yashv373.github.io/">');
+    var w = window.open('', '_blank'); w.document.open(); w.document.write(html); w.document.close();
+  };
   $('publish').onclick = function () {
     var d = clean();
     status('Publishing…');
     put('content.json', toB64(JSON.stringify(d, null, 2) + '\n'), 'Update content (website editor)')
       .then(function () { return put('index.html', toB64(YSBuild.page(d)), 'Rebuild page (website editor)'); })
+      .then(function () { return put('notes.html', toB64(YSBuild.notes(d)), 'Rebuild notes (website editor)'); })
       .then(function () { return put('llms.txt', toB64(YSBuild.llms(d)), 'Refresh llms.txt (website editor)'); })
       .then(function () { return put('sitemap.xml', toB64(YSBuild.sitemap(d, new Date().toISOString().slice(0, 10))), 'Refresh sitemap (website editor)'); })
       .then(function () { dirty = false; status('Published! Live in about a minute.', 'ok'); })

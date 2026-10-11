@@ -72,4 +72,10 @@ Google Scholar: https://scholar.google.com/citations?user=YZYt6oYAAAAJ&hl=en
 - Nov 2025: Our team won the Edge AI Accelerator track at Silicon Sprint 2025 (IEEE NITK, IEEE RVCE, Tenstorrent) by building a 4×4 systolic array in 24 hours.
 - Nov 2025: Project Kalki got a Special Mention at SYNCHRON'25 and 2nd place at the BIS ECE case study competition.
 
+## Notes (https://yashv373.github.io/notes.html)
+- Start here [00 Start]: https://yashv373.github.io/notes.html#start-here
+- Setup and hold time [05 Timing]: https://yashv373.github.io/notes.html#setup-and-hold-time
+- Clock domain crossing [03 RTL Design / Clocking]: https://yashv373.github.io/notes.html#clock-domain-crossing
+- Systolic arrays [02 Architecture / Accelerators]: https://yashv373.github.io/notes.html#systolic-arrays
+
 Note: other people share the name Yashvardhan Singh. This page is about the digital IC / chip design engineer from MIT Manipal and STMicroelectronics.

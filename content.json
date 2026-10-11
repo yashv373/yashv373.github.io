@@ -9,7 +9,7 @@
     "cv": "",
     "updated": "October 2026",
     "before": "At 16, I started a esports team, grew it to a 2,000+ member community, ran a 64-team national tournament, and later saw it merge into a larger organization. I also did freelance graphic design for four years ([portfolio](https://www.behance.net/zmagnus)). Both still help when I'm running events or doing presentations.",
-    "goatcounter": "<script data-goatcounter=\"https://yashvardhansingh.goatcounter.com/count\"         async src=\"//gc.zgo.at/count.js\"></script>"
+    "goatcounter": "yashvardhansingh"
   },
   "news": [
     {
@@ -433,6 +433,36 @@
       "sub": "M# Manipal Hackathon 2024, 408 teams",
       "when": "Oct 2024",
       "logo": "techtatva"
+    }
+  ],
+  "notes": [
+    {
+      "title": "Start here",
+      "folder": "00 Start",
+      "tags": "",
+      "updated": "2026-10-11",
+      "body": "These are my working notes on chip design, written the way I'd explain things to a friend. They're not polished, and they change as I learn.\n\nNotes link to each other, like [[Setup and hold time]] or [[Clock domain crossing]]. The graph shows how everything connects: click any dot to open that note.\n\nIf something here looks wrong, I'd love to hear about it."
+    },
+    {
+      "title": "Setup and hold time",
+      "folder": "05 Timing",
+      "tags": "timing, sta",
+      "updated": "2026-10-11",
+      "body": "Every flip-flop needs its input **D** to sit still for a short time around the clock edge.\n\n- **Setup time** ($t_{su}$): how long D must be stable *before* the edge.\n- **Hold time** ($t_h$): how long D must stay stable *after* the edge.\n\nBreak either one and the flop can go metastable, which is also the core problem in [[Clock domain crossing]].\n\n## Setup check\n\nData launched on one clock edge must arrive before the next edge, with setup time to spare:\n\n$$t_{cq} + t_{logic,max} + t_{su} \\le T_{clk} + t_{skew}$$\n\nIf this fails, you can slow the clock, shorten the logic path, or split it with a pipeline stage.\n\n## Hold check\n\nNew data must not arrive *too early* and overwrite the value being captured on the same edge:\n\n$$t_{cq} + t_{logic,min} \\ge t_h + t_{skew}$$\n\nHold does not depend on the clock period, so slowing the clock never fixes a hold violation. The usual fix is adding delay (buffers) on the short path.\n\n> Here $t_{skew}$ = capture clock arrival time minus launch clock arrival time."
+    },
+    {
+      "title": "Clock domain crossing",
+      "folder": "03 RTL Design / Clocking",
+      "tags": "cdc, metastability",
+      "updated": "2026-10-11",
+      "body": "A clock domain crossing (CDC) happens when a signal made on one clock is read by flops on a different, unrelated clock. The two clocks' edges have no fixed relationship, so sometimes the receiving flop samples the signal right while it changes. That breaks [[Setup and hold time]] and the flop goes **metastable**.\n\n## Single-bit signals\n\nUse a **two-flop synchronizer**: two flops in a row on the destination clock. The first one may go metastable, but it gets a full clock cycle to settle before the second one samples it.\n\n- Only works for single bits that stay stable long enough to be seen.\n- Never put logic between the two flops.\n\n## Multi-bit signals\n\nSyncing each bit on its own does not work: bits can settle on different cycles and give a value that never existed. Common fixes:\n\n| Situation | Approach |\n|---|---|\n| Counter or pointer | Gray code first, then sync (only one bit changes at a time) |\n| Data bus | Handshake (req/ack) or a synced enable |\n| Stream of data | Asynchronous FIFO with Gray-coded pointers |\n\n## Checking it\n\nNormal simulation rarely catches CDC bugs. Structural CDC tools look at the design and flag every crossing that has no proper synchronizer."
+    },
+    {
+      "title": "Systolic arrays",
+      "folder": "02 Architecture / Accelerators",
+      "tags": "ai hardware",
+      "updated": "2026-10-11",
+      "body": "A systolic array is a grid of small, identical processing elements (PEs). Each PE does a multiply-accumulate (MAC) and passes data to its neighbours every clock cycle, like a heartbeat pumping data through the grid. That's where the name comes from.\n\n## Why it's fast\n\n- Each value read from memory gets reused many times as it travels across the array.\n- PEs only talk to their neighbours, so wires stay short and timing is easier to close (see [[Setup and hold time]]).\n- An N×N array does N² MACs every cycle once it's full.\n\n## Dataflows\n\n| Dataflow | What stays put in each PE |\n|---|---|\n| Weight stationary | Weights |\n| Output stationary | Partial sums |\n| Input stationary | Input activations |\n\nThe catch is fill and drain time: the array needs roughly 2N cycles before every PE is busy, so small matrices waste some of it.\n\nI built a 4×4 one in [Project Kalki](./#projects)."
     }
   ]
 }

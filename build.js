@@ -172,7 +172,7 @@
     var oa = gallery(d.outAndAbout);
     if (oa) h.push('<div class="photoblock"><h4>Out and about</h4>' + oa + '</div>');
     h.push('</section>');
-    h.push('\n<footer>' + badge('badge') + '<div><a class="admin-link" href="admin.html">' + esc(P.name) + '</a><br>Last updated ' + esc(P.updated) + '.' + (P.goatcounter ? '<br><span id="visits" data-gc="' + esc(P.goatcounter) + '"></span>' : '') + '</div><p class="sig" role="img" aria-label="Signature: ' + esc(P.name) + '"><span>Yashvardhan</span><span>Singh</span></p></footer>\n</main>');
+    h.push('\n<footer>' + badge('badge') + '<div><a class="admin-link" href="admin.html">' + esc(P.name) + '</a><br>Last updated ' + esc(P.updated) + '.' + (P.goatcounter ? '<br><span id="visits" data-gc="' + esc(P.goatcounter) + '"></span>' : '') + '<br><a class="notes-link" href="notes.html">my notes &rarr;</a></div><p class="sig" role="img" aria-label="Signature: ' + esc(P.name) + '"><span>Yashvardhan</span><span>Singh</span></p></footer>\n</main>');
     h.push('<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer"><span class="lb-count" id="lb-count"></span><button class="lb-close" id="lb-close" aria-label="Close">&times;</button><button class="lb-prev" id="lb-prev" aria-label="Previous photo">&lsaquo;</button><figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure><button class="lb-next" id="lb-next" aria-label="Next photo">&rsaquo;</button></div>');
     h.push('<script src="site.js"></script>');
     if (P.goatcounter) h.push('<script data-goatcounter="https://' + esc(P.goatcounter) + '.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>');
@@ -199,6 +199,7 @@
     block('Other roles', d.otherRoles, function (c) { return plain(c.title) + ', ' + plain(c.sub) + ' (' + c.when + ')'; });
     block('Honors', d.honors, function (c) { return plain(c.title) + ', ' + plain(c.sub) + ' (' + c.when + ')'; });
     block('Recent news', (d.news || []).slice(0, 10), function (n) { return n.date + ': ' + plain(n.text); });
+    block('Notes (' + SITE + 'notes.html)', noteList(d).slice(0, 40), function (n) { return n.t + ' [' + n.f + ']: ' + SITE + 'notes.html#' + n.s; });
     o.push('', 'Note: other people share the name ' + P.name + '. This page is about the digital IC / chip design engineer from MIT Manipal and STMicroelectronics.', '');
     return o.join('\n');
   }
@@ -208,9 +209,145 @@
       .forEach(function (s) { pairs(s).forEach(function (x) { imgs.push(x[0]); }); });
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n  <url>\n    <loc>' + SITE + '</loc>\n    <lastmod>' + day + '</lastmod>\n' +
       imgs.map(function (p) { return '    <image:image><image:loc>' + SITE + esc(p) + '</image:loc></image:image>'; }).join('\n') +
-      '\n  </url>\n  <url>\n    <loc>' + SITE + 'llms.txt</loc>\n    <lastmod>' + day + '</lastmod>\n  </url>\n</urlset>\n';
+      '\n  </url>\n  <url>\n    <loc>' + SITE + 'notes.html</loc>\n    <lastmod>' + day + '</lastmod>\n  </url>\n  <url>\n    <loc>' + SITE + 'llms.txt</loc>\n    <lastmod>' + day + '</lastmod>\n  </url>\n</urlset>\n';
   }
 
-  var api = {page: page, badge: badge, favicon: favicon, llms: llms, sitemap: sitemap, names: NAMES};
+  /* ---------- notes ---------- */
+  function slugify(t) { return String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'note'; }
+  function mdInline(s, ctx) {
+    var keep = [];
+    function hold(h) { keep.push(h); return '\u0000' + (keep.length - 1) + '\u0000'; }
+    s = s.replace(/`([^`]+)`/g, function (m, c) { return hold('<code>' + esc(c) + '</code>'); });
+    s = s.replace(/\$\$([^$]+)\$\$/g, function (m) { return hold(esc(m)); }).replace(/\$([^$\n]+)\$/g, function (m) { return hold(esc(m)); });
+    s = s.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, function (m, t, l) { return hold(ctx.wiki(t.trim(), (l || t).trim())); });
+    s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function (m, a, u) { return hold('<img src="' + esc(u) + '" alt="' + esc(a) + '" loading="lazy">'); });
+    s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, t, u) { return hold('<a href="' + esc(u) + '">' + esc(t) + '</a>'); });
+    s = esc(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\*([^*\s][^*]*)\*/g, '<i>$1</i>');
+    return s.replace(/\u0000(\d+)\u0000/g, function (m, i) { return keep[+i]; });
+  }
+  function md(src, ctx) {
+    var L = String(src || '').replace(/\r/g, '').split('\n'), out = [], i = 0, para = [], m;
+    function flush() { if (para.length) { out.push('<p>' + mdInline(para.join(' '), ctx) + '</p>'); para = []; } }
+    function cells(r) { return r.trim().replace(/^\||\|$/g, '').split('|').map(function (c) { return c.trim(); }); }
+    while (i < L.length) {
+      var l = L[i];
+      if (/^```/.test(l)) {
+        flush(); var lang = l.slice(3).trim(), code = []; i++;
+        while (i < L.length && !/^```/.test(L[i])) { code.push(L[i]); i++; }
+        i++; out.push('<pre><code' + (lang ? ' class="lang-' + esc(lang) + '"' : '') + '>' + esc(code.join('\n')) + '</code></pre>'); continue;
+      }
+      if (/^\$\$\s*$/.test(l)) {
+        flush(); var mm = []; i++;
+        while (i < L.length && !/^\$\$\s*$/.test(L[i])) { mm.push(L[i]); i++; }
+        i++; out.push('<div class="math">$$' + esc(mm.join('\n')) + '$$</div>'); continue;
+      }
+      if (/^\s*$/.test(l)) { flush(); i++; continue; }
+      if ((m = l.match(/^(#{1,4})\s+(.*)$/))) { flush(); var n = Math.max(2, m[1].length); out.push('<h' + n + '>' + mdInline(m[2], ctx) + '</h' + n + '>'); i++; continue; }
+      if (/^(-{3,}|\*{3,})\s*$/.test(l)) { flush(); out.push('<hr>'); i++; continue; }
+      if (/^>\s?/.test(l)) {
+        flush(); var q = [];
+        while (i < L.length && /^>\s?/.test(L[i])) { q.push(L[i].replace(/^>\s?/, '')); i++; }
+        out.push('<blockquote>' + md(q.join('\n'), ctx) + '</blockquote>'); continue;
+      }
+      if (/^\s*([-*+]|\d+\.)\s+/.test(l)) {
+        flush(); var ol = /^\s*\d+\./.test(l), items = [];
+        while (i < L.length && /^\s*([-*+]|\d+\.)\s+/.test(L[i])) { items.push(L[i].replace(/^\s*([-*+]|\d+\.)\s+/, '')); i++; }
+        var tg = ol ? 'ol' : 'ul';
+        out.push('<' + tg + '>' + items.map(function (t) { return '<li>' + mdInline(t, ctx) + '</li>'; }).join('') + '</' + tg + '>'); continue;
+      }
+      if (/^\|.*\|\s*$/.test(l) && i + 1 < L.length && /^\|?\s*:?-{2,}/.test(L[i + 1])) {
+        flush(); var head = cells(l), rows = []; i += 2;
+        while (i < L.length && /^\|.*\|\s*$/.test(L[i])) { rows.push(cells(L[i])); i++; }
+        out.push('<table><thead><tr>' + head.map(function (c) { return '<th>' + mdInline(c, ctx) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+          rows.map(function (r) { return '<tr>' + r.map(function (c) { return '<td>' + mdInline(c, ctx) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table>'); continue;
+      }
+      para.push(l.trim()); i++;
+    }
+    flush(); return out.join('\n');
+  }
+  function fmtDay(s) {
+    var p = String(s || '').split('-'), M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return p.length === 3 ? (+p[2]) + ' ' + M[+p[1] - 1] + ' ' + p[0] : '';
+  }
+  function noteList(d) {
+    var used = {}, list = (d.notes || []).filter(function (n) { return n.title; }).map(function (n) {
+      var s = slugify(n.title), k = s, j = 2; while (used[k]) k = s + '-' + (j++); used[k] = 1;
+      return {s: k, t: n.title, f: String(n.folder || 'Unsorted').trim() || 'Unsorted', tags: n.tags || '', u: n.updated || '', body: n.body || ''};
+    });
+    return list;
+  }
+  function notes(d) {
+    var P = d.profile, list = noteList(d), byKey = {}, links = [], back = {};
+    list.forEach(function (n) { byKey[n.t.toLowerCase()] = n; byKey[n.s] = n; });
+    var tops = [];
+    list.forEach(function (n) { var t = n.f.split('/')[0].trim(); if (tops.indexOf(t) < 0) tops.push(t); });
+    tops.sort(function (a, b) { return a.localeCompare(b, undefined, {numeric: true}); });
+    list.forEach(function (n) {
+      n.html = md(n.body, {wiki: function (t, label) {
+        var to = byKey[t.toLowerCase()] || byKey[slugify(t)];
+        if (!to) return '<span class="wl missing" title="Not written yet">' + esc(label) + '</span>';
+        if (to !== n) { links.push([n.s, to.s]); back[to.s] = back[to.s] || []; if (back[to.s].indexOf(n) < 0) back[to.s].push(n); }
+        return '<a class="wl" href="#' + to.s + '">' + esc(label) + '</a>';
+      }});
+    });
+    // folder tree: "A / B / C" nests as deep as you like
+    var root = {kids: {}, notes: []};
+    list.forEach(function (n) {
+      var node = root;
+      n.f.split('/').map(function (x) { return x.trim(); }).filter(Boolean).forEach(function (seg) { node = node.kids[seg] = node.kids[seg] || {kids: {}, notes: []}; });
+      node.notes.push(n);
+    });
+    function count(node) { var c = node.notes.length; for (var k in node.kids) c += count(node.kids[k]); return c; }
+    function tree(node, depth) {
+      var keys = Object.keys(node.kids).sort(function (a, b) { return a.localeCompare(b, undefined, {numeric: true}); });
+      return '<ul>' + keys.map(function (k) {
+        var c = node.kids[k];
+        return '<li class="nt-dir"><details' + (depth === 0 ? ' open' : '') + '><summary>' + esc(k) + ' <span>' + count(c) + '</span></summary>' + tree(c, depth + 1) + '</details></li>';
+      }).join('') + node.notes.slice().sort(function (a, b) { return a.t.localeCompare(b.t, undefined, {numeric: true}); }).map(function (n) {
+        return '<li><a href="#' + n.s + '" data-s="' + n.s + '">' + esc(n.t) + '</a></li>';
+      }).join('') + '</ul>';
+    }
+    var title = 'Notes | ' + P.name, desc = 'Working notes by ' + P.name + ' on chip design, VLSI, computer architecture and more.';
+    var h = [];
+    h.push('<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="color-scheme" content="light">');
+    h.push('<title>' + esc(title) + '</title>\n<meta name="description" content="' + esc(desc) + '">\n<meta name="author" content="' + esc(P.name) + '">');
+    h.push('<link rel="canonical" href="' + SITE + 'notes.html">\n<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">');
+    h.push('<meta property="og:title" content="' + esc(title) + '">\n<meta property="og:description" content="' + esc(desc) + '">\n<meta property="og:url" content="' + SITE + 'notes.html">\n<meta property="og:image" content="' + SITE + 'photo.jpg">');
+    h.push('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+    h.push('<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">');
+    h.push('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">\n<link rel="stylesheet" href="style.css">\n</head>\n<body class="nt-page">');
+    h.push('<div class="nt-app" id="nt-app">');
+    h.push('<header class="nt-top"><button class="nt-btn" id="nt-t-side" type="button" aria-pressed="true">Sidebar</button>' +
+      '<a class="nt-home" href="./">' + esc(P.name) + '</a><span class="nt-sep">/</span><a class="nt-title" href="#">Notes</a>' +
+      '<input id="nt-q" type="search" placeholder="Search notes" aria-label="Search notes"><button class="nt-btn" id="nt-t-graph" type="button" aria-pressed="true">Graph</button></header>');
+    h.push('<aside class="nt-side" id="nt-side" aria-label="All notes"><div class="nt-tree">' + tree(root, 0) + '</div></aside>');
+    h.push('<div class="nt-gpane" id="nt-gpane"><canvas id="nt-graph" aria-label="Graph of how notes link to each other"></canvas><p class="nt-hint">Scroll to zoom &middot; drag to move &middot; click a dot to open</p></div>');
+    h.push('<main class="nt-main" id="nt-main"><div class="nt-read">');
+    var recent = list.slice().sort(function (a, b) { return (b.u || '').localeCompare(a.u || ''); }).slice(0, 8);
+    h.push('<div class="nt-view" id="nt-home"><h1>Notes</h1><p class="nt-meta">' + list.length + ' notes. Pick one from the sidebar, or click a dot in the graph. Lines show which notes link to each other.</p>' +
+      (recent.length ? '<h4 class="nt-h">Recently updated</h4><ul class="nt-list">' + recent.map(function (n) { return '<li><a href="#' + n.s + '">' + esc(n.t) + '</a><span class="when">' + esc(fmtDay(n.u)) + '</span></li>'; }).join('') + '</ul>' : '') +
+      '<p class="nt-back-home"><a href="./">&larr; Back to ' + esc(P.name) + '</a></p></div>');
+    list.forEach(function (n) {
+      var tags = String(n.tags).split(',').map(function (x) { return x.trim(); }).filter(Boolean);
+      var b = back[n.s] || [];
+      h.push('<article class="nt-view" id="n-' + n.s + '" hidden><p class="nt-path">' + n.f.split('/').map(function (x) { return esc(x.trim()); }).filter(Boolean).join(' &rsaquo; ') + '</p><h1>' + esc(n.t) + '</h1>' +
+        '<p class="nt-meta">' + (n.u ? 'Updated ' + esc(fmtDay(n.u)) : '') + (tags.length ? ' &nbsp;' + tags.map(function (t) { return '<span class="nt-tag">' + esc(t) + '</span>'; }).join('') : '') + '</p>' +
+        '<div class="nt-body">' + n.html + '</div>' +
+        (b.length ? '<div class="nt-back"><h4>Linked from</h4><ul>' + b.map(function (x) { return '<li><a href="#' + x.s + '">' + esc(x.t) + '</a></li>'; }).join('') + '</ul></div>' : '') + '</article>');
+    });
+    h.push('</div></main>\n</div>');
+    var idx = {}; list.forEach(function (n, i) { idx[n.s] = i; });
+    var seen = {}, E = [];
+    links.forEach(function (e) { var a = idx[e[0]], b = idx[e[1]], k = Math.min(a, b) + '-' + Math.max(a, b); if (!seen[k]) { seen[k] = 1; E.push([a, b]); } });
+    var G = {nodes: list.map(function (n) { return {s: n.s, t: n.t, f: tops.indexOf(n.f.split('/')[0].trim())}; }), links: E};
+    h.push('<script>window.NT_GRAPH = ' + JSON.stringify(G).replace(/</g, '\\u003c') + ';</script>');
+    h.push('<script src="notes.js"></script>');
+    h.push('<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>');
+    h.push('<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="window.ntMath && window.ntMath()"></script>');
+    h.push('</body>\n</html>\n');
+    return h.join('\n');
+  }
+
+  var api = {page: page, notes: notes, badge: badge, favicon: favicon, llms: llms, sitemap: sitemap, names: NAMES};
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.YSBuild = api;
 })(this);
