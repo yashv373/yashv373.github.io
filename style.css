@@ -151,9 +151,8 @@ footer::before { flex-basis: 100%; margin-bottom: 0.4rem; }
 }
 @media (prefers-reduced-motion: reduce) { .gallery img { transition: none; } .gallery a:hover img { transform: none; } }
 
-/* ---------- "my notes" button in the homepage footer ---------- */
-.notes-link { display: inline-block; margin-top: 0.4rem; font-family: var(--head); font-weight: 700; font-size: 0.8rem; padding: 0.25rem 0.75rem; border: 1px solid var(--ink); border-radius: 999px; color: var(--ink); }
-.notes-link:hover { background: var(--ink); color: var(--bg); text-decoration: none; }
+/* the footer logo's orange tick is a quiet way into the notes */
+.badge .egg { cursor: default; }
 
 /* ---------- notes app: sidebar | graph | reading pane ---------- */
 body.nt-page { height: 100vh; overflow: hidden; }
@@ -234,3 +233,21 @@ main.nt-main { grid-area: main; overflow-y: auto; max-width: none; margin: 0; pa
   #nt-q { order: 5; width: 100%; margin-left: 0; }
   main.nt-main { padding: 1.4rem 1.2rem 4rem; }
 }
+
+/* ---------- notes: search results, graph mode chips, home list ---------- */
+.nt-results { padding-top: 0.2rem; }
+.nt-rcount { margin: 0 0 0.5rem; font-size: 0.85rem; color: var(--muted); }
+.nt-hit { display: block; padding: 0.45rem 0.55rem; margin-bottom: 0.15rem; border-radius: 6px; color: var(--ink); line-height: 1.3; }
+.nt-hit:hover, .nt-hit.first { background: #F0EBE0; text-decoration: none; }
+.nt-hit b { display: block; font-family: var(--head); font-size: 0.9rem; }
+.nt-hit span { display: block; font-size: 0.8rem; color: var(--muted); }
+.nt-hit em { display: block; font-style: normal; font-size: 0.88rem; color: #3A352D; margin-top: 0.15rem; }
+.nt-hit mark { background: #F8E3A8; color: inherit; border-radius: 2px; }
+.nt-empty { color: var(--muted); font-size: 0.95rem; }
+.nt-gbar { position: absolute; top: 0.7rem; right: 0.8rem; display: flex; gap: 0.35rem; }
+.nt-chip { font-family: var(--head); font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem; border: 1px solid var(--rule); border-radius: 999px; background: #fff; color: var(--muted); cursor: pointer; }
+.nt-chip[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
+.nt-chip[hidden] { display: none; }
+.nt-all ul { margin: 0.2rem 0 1rem; padding-left: 1.2rem; }
+.nt-all .nt-path { margin-top: 0.8rem; }
+kbd { font-family: var(--head); font-size: 0.75em; padding: 0.05em 0.35em; border: 1px solid var(--rule); border-bottom-width: 2px; border-radius: 4px; background: #fff; }

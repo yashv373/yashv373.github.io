@@ -107,3 +107,15 @@ document.querySelectorAll('figure[data-p]').forEach(function (fig) {
     }
   }
 })();
+
+/* a small secret: the orange tick in the footer logo, or typing "notes" */
+(function () {
+  var egg = document.querySelector('.badge .egg'), typed = '';
+  function go() { location.href = '/notes.html'; }
+  if (egg) egg.addEventListener('click', go);
+  document.addEventListener('keydown', function (e) {
+    if (/input|textarea|select/i.test((e.target || {}).tagName || '') || e.ctrlKey || e.metaKey || e.altKey) return;
+    typed = (typed + (e.key || '')).slice(-5).toLowerCase();
+    if (typed === 'notes') go();
+  });
+})();

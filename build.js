@@ -44,8 +44,8 @@
   }
   function paras(s) { return lines(s).map(function (l) { return '<p>' + inline(l) + '</p>'; }).join(''); }
 
-  function mono(x, y, scale) {
-    return '<g transform="translate(' + x + ' ' + y + ') scale(' + scale + ')"><path fill="#1E1F22" d="' + MONO_DARK + '"/><path fill="#FF3B00" d="' + MONO_ORANGE + '"/></g>';
+  function mono(x, y, scale, egg) {
+    return '<g transform="translate(' + x + ' ' + y + ') scale(' + scale + ')"><path fill="#1E1F22" d="' + MONO_DARK + '"/><path' + (egg ? ' class="egg"' : '') + ' fill="#FF3B00" d="' + MONO_ORANGE + '"/></g>';
   }
   function badge(cls) {
     var pads = '';
@@ -63,7 +63,7 @@
       '<text font-size="13" letter-spacing="2.6"><textPath href="#ys-top" startOffset="50%">YASHVARDHAN SINGH</textPath></text>' +
       '<text font-size="11.5" letter-spacing="2.2"><textPath href="#ys-bot" startOffset="50%">HARDWARE ENGINEERING</textPath></text></g>' +
       '<circle cx="37" cy="120" r="2.2" fill="#FF3B00"/><circle cx="203" cy="120" r="2.2" fill="#FF3B00"/>' +
-      mono(91.5, 85.25, 0.57) + '</svg>';
+      mono(91.5, 85.25, 0.57, cls === 'badge') + '</svg>';
   }
   function favicon() {
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="22" fill="#fff"/>' + mono(21.4, 12, 0.852) + '</svg>\n';
@@ -172,7 +172,7 @@
     var oa = gallery(d.outAndAbout);
     if (oa) h.push('<div class="photoblock"><h4>Out and about</h4>' + oa + '</div>');
     h.push('</section>');
-    h.push('\n<footer>' + badge('badge') + '<div><a class="admin-link" href="admin.html">' + esc(P.name) + '</a><br>Last updated ' + esc(P.updated) + '.' + (P.goatcounter ? '<br><span id="visits" data-gc="' + esc(P.goatcounter) + '"></span>' : '') + '<br><a class="notes-link" href="notes.html">my notes &rarr;</a></div><p class="sig" role="img" aria-label="Signature: ' + esc(P.name) + '"><span>Yashvardhan</span><span>Singh</span></p></footer>\n</main>');
+    h.push('\n<footer>' + badge('badge') + '<div><a class="admin-link" href="admin.html">' + esc(P.name) + '</a><br>Last updated ' + esc(P.updated) + '.' + (P.goatcounter ? '<br><span id="visits" data-gc="' + esc(P.goatcounter) + '"></span>' : '') + '</div><p class="sig" role="img" aria-label="Signature: ' + esc(P.name) + '"><span>Yashvardhan</span><span>Singh</span></p></footer>\n</main>');
     h.push('<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer"><span class="lb-count" id="lb-count"></span><button class="lb-close" id="lb-close" aria-label="Close">&times;</button><button class="lb-prev" id="lb-prev" aria-label="Previous photo">&lsaquo;</button><figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure><button class="lb-next" id="lb-next" aria-label="Next photo">&rsaquo;</button></div>');
     h.push('<script src="site.js"></script>');
     if (P.goatcounter) h.push('<script data-goatcounter="https://' + esc(P.goatcounter) + '.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>');
@@ -181,7 +181,7 @@
   }
 
   function plain(s) { return String(s || '').replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, t, u) { return u.charAt(0) === '#' ? t : t + ' (' + u + ')'; }).replace(/\*\*/g, ''); }
-  function llms(d) {
+  function llms(d, notesArr) {
     var P = d.profile, o = [], em = String(P.email || '').split('@');
     o.push('# ' + P.name, '');
     o.push('> ' + plain(String(P.bio || '').replace(/\s*\n\s*\n\s*/g, ' ')), '');
@@ -199,17 +199,16 @@
     block('Other roles', d.otherRoles, function (c) { return plain(c.title) + ', ' + plain(c.sub) + ' (' + c.when + ')'; });
     block('Honors', d.honors, function (c) { return plain(c.title) + ', ' + plain(c.sub) + ' (' + c.when + ')'; });
     block('Recent news', (d.news || []).slice(0, 10), function (n) { return n.date + ': ' + plain(n.text); });
-    block('Notes (' + SITE + 'notes.html)', noteList(d).slice(0, 40), function (n) { return n.t + ' [' + n.f + ']: ' + SITE + 'notes.html#' + n.s; });
     o.push('', 'Note: other people share the name ' + P.name + '. This page is about the digital IC / chip design engineer from MIT Manipal and STMicroelectronics.', '');
     return o.join('\n');
   }
-  function sitemap(d, day) {
+  function sitemap(d, day, notesArr) {
     var imgs = ['photo.jpg'];
     [d.outAndAbout].concat((d.projects || []).concat(d.experience || [], d.volunteering || []).map(function (e) { return e.photos; }))
       .forEach(function (s) { pairs(s).forEach(function (x) { imgs.push(x[0]); }); });
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n  <url>\n    <loc>' + SITE + '</loc>\n    <lastmod>' + day + '</lastmod>\n' +
       imgs.map(function (p) { return '    <image:image><image:loc>' + SITE + esc(p) + '</image:loc></image:image>'; }).join('\n') +
-      '\n  </url>\n  <url>\n    <loc>' + SITE + 'notes.html</loc>\n    <lastmod>' + day + '</lastmod>\n  </url>\n  <url>\n    <loc>' + SITE + 'llms.txt</loc>\n    <lastmod>' + day + '</lastmod>\n  </url>\n</urlset>\n';
+      '\n  </url>\n  <url>\n    <loc>' + SITE + 'llms.txt</loc>\n    <lastmod>' + day + '</lastmod>\n  </url>\n</urlset>\n';
   }
 
   /* ---------- notes ---------- */
@@ -221,7 +220,7 @@
     s = s.replace(/\$\$([^$]+)\$\$/g, function (m) { return hold(esc(m)); }).replace(/\$([^$\n]+)\$/g, function (m) { return hold(esc(m)); });
     s = s.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, function (m, t, l) { return hold(ctx.wiki(t.trim(), (l || t).trim())); });
     s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function (m, a, u) { return hold('<img src="' + esc(u) + '" alt="' + esc(a) + '" loading="lazy">'); });
-    s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, t, u) { return hold('<a href="' + esc(u) + '">' + esc(t) + '</a>'); });
+    s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, t, u) { if (u.indexOf('./') === 0) u = u.slice(1); return hold('<a href="' + esc(u) + '"' + (/^https?:/.test(u) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(t) + '</a>'); });
     s = esc(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\*([^*\s][^*]*)\*/g, '<i>$1</i>');
     return s.replace(/\u0000(\d+)\u0000/g, function (m, i) { return keep[+i]; });
   }
@@ -269,85 +268,134 @@
     var p = String(s || '').split('-'), M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return p.length === 3 ? (+p[2]) + ' ' + M[+p[1] - 1] + ' ' + p[0] : '';
   }
-  function noteList(d) {
-    var used = {}, list = (d.notes || []).filter(function (n) { return n.title; }).map(function (n) {
-      var s = slugify(n.title), k = s, j = 2; while (used[k]) k = s + '-' + (j++); used[k] = 1;
-      return {s: k, t: n.title, f: String(n.folder || 'Unsorted').trim() || 'Unsorted', tags: n.tags || '', u: n.updated || '', body: n.body || ''};
+  function normNotes(arr) {
+    var used = {};
+    return (arr || []).filter(function (n) { return n && n.title; }).map(function (n) {
+      var id = slugify(n.id || n.title), k = id, j = 2; while (used[k]) k = id + '-' + (j++); used[k] = 1;
+      return {id: k, t: n.title, f: String(n.folder || 'Unsorted').split('/').map(function (x) { return x.trim(); }).filter(Boolean).join(' / ') || 'Unsorted', tags: n.tags || '', u: n.updated || '', body: n.body || ''};
     });
-    return list;
   }
-  function notes(d) {
-    var P = d.profile, list = noteList(d), byKey = {}, links = [], back = {};
-    list.forEach(function (n) { byKey[n.t.toLowerCase()] = n; byKey[n.s] = n; });
-    var tops = [];
-    list.forEach(function (n) { var t = n.f.split('/')[0].trim(); if (tops.indexOf(t) < 0) tops.push(t); });
-    tops.sort(function (a, b) { return a.localeCompare(b, undefined, {numeric: true}); });
+  function noteLinks(list, rel) {
+    var byKey = {}, back = {};
+    list.forEach(function (n) { byKey[n.t.toLowerCase()] = n; byKey[n.id] = n; });
     list.forEach(function (n) {
+      n.out = [];
       n.html = md(n.body, {wiki: function (t, label) {
         var to = byKey[t.toLowerCase()] || byKey[slugify(t)];
         if (!to) return '<span class="wl missing" title="Not written yet">' + esc(label) + '</span>';
-        if (to !== n) { links.push([n.s, to.s]); back[to.s] = back[to.s] || []; if (back[to.s].indexOf(n) < 0) back[to.s].push(n); }
-        return '<a class="wl" href="#' + to.s + '">' + esc(label) + '</a>';
+        if (to !== n) { if (n.out.indexOf(to.id) < 0) n.out.push(to.id); back[to.id] = back[to.id] || []; if (back[to.id].indexOf(n) < 0) back[to.id].push(n); }
+        return '<a class="wl" href="' + rel + to.id + '.html">' + esc(label) + '</a>';
       }});
     });
-    // folder tree: "A / B / C" nests as deep as you like
-    var root = {kids: {}, notes: []};
-    list.forEach(function (n) {
-      var node = root;
-      n.f.split('/').map(function (x) { return x.trim(); }).filter(Boolean).forEach(function (seg) { node = node.kids[seg] = node.kids[seg] || {kids: {}, notes: []}; });
-      node.notes.push(n);
+    return back;
+  }
+  /* render one note body (used by the editor's live preview) */
+  function renderNote(body, arr) {
+    var list = normNotes(arr), byKey = {};
+    list.forEach(function (n) { byKey[n.t.toLowerCase()] = n; byKey[n.id] = n; });
+    return md(body, {wiki: function (t, label) {
+      var to = byKey[t.toLowerCase()] || byKey[slugify(t)];
+      return to ? '<a class="wl" href="#">' + esc(label) + '</a>' : '<span class="wl missing" title="Not written yet">' + esc(label) + '</span>';
+    }});
+  }
+  /* graph positions: existing dots keep their place, new dots settle in near their links */
+  function layout(list, prev) {
+    var old = {}, idx = {}, nb = list.map(function () { return []; });
+    ((prev && prev.notes) || []).forEach(function (p) { if (typeof p.x === 'number') old[p.i] = p; });
+    list.forEach(function (n, i) { idx[n.id] = i; });
+    list.forEach(function (n, i) { n.out.forEach(function (id) { var j = idx[id]; if (j !== undefined) { nb[i].push(j); nb[j].push(i); } }); });
+    var seed = 11;
+    function rnd() { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+    var R = 60 * Math.sqrt(list.length + 1), fresh = 0;
+    var P = list.map(function (n) { var o = old[n.id]; return o ? {x: o.x, y: o.y, fixed: true} : null; });
+    P = P.map(function (p, i) {
+      if (p) return p;
+      fresh++;
+      var x = 0, y = 0, c = 0;
+      nb[i].forEach(function (j) { if (P[j]) { x += P[j].x; y += P[j].y; c++; } });
+      return c ? {x: x / c + (rnd() - 0.5) * 50, y: y / c + (rnd() - 0.5) * 50} : {x: (rnd() - 0.5) * R, y: (rnd() - 0.5) * R};
     });
-    function count(node) { var c = node.notes.length; for (var k in node.kids) c += count(node.kids[k]); return c; }
-    function tree(node, depth) {
-      var keys = Object.keys(node.kids).sort(function (a, b) { return a.localeCompare(b, undefined, {numeric: true}); });
-      return '<ul>' + keys.map(function (k) {
-        var c = node.kids[k];
-        return '<li class="nt-dir"><details' + (depth === 0 ? ' open' : '') + '><summary>' + esc(k) + ' <span>' + count(c) + '</span></summary>' + tree(c, depth + 1) + '</details></li>';
-      }).join('') + node.notes.slice().sort(function (a, b) { return a.t.localeCompare(b.t, undefined, {numeric: true}); }).map(function (n) {
-        return '<li><a href="#' + n.s + '" data-s="' + n.s + '">' + esc(n.t) + '</a></li>';
-      }).join('') + '</ul>';
+    var iters = !fresh ? 0 : (fresh === list.length ? 300 : 150), CELL = 90, all = fresh === list.length;
+    var movers = []; P.forEach(function (p, i) { if (!p.fixed) movers.push(i); });
+    for (var it = 0; it < iters; it++) {
+      var grid = {};
+      P.forEach(function (p, i) { var k = Math.floor(p.x / CELL) + ',' + Math.floor(p.y / CELL); (grid[k] = grid[k] || []).push(i); });
+      var F = {};
+      movers.forEach(function (i) {
+        var p = P[i], fx = 0, fy = 0, cx = Math.floor(p.x / CELL), cy = Math.floor(p.y / CELL);
+        for (var gx = cx - 1; gx <= cx + 1; gx++) for (var gy = cy - 1; gy <= cy + 1; gy++) {
+          (grid[gx + ',' + gy] || []).forEach(function (j) {
+            if (j === i) return;
+            var q = P[j], dx = p.x - q.x, dy = p.y - q.y, d2 = dx * dx + dy * dy + 0.01, d = Math.sqrt(d2), f = Math.min(1600 / d2, 12);
+            fx += dx / d * f; fy += dy / d * f;
+          });
+        }
+        nb[i].forEach(function (j) { var q = P[j], dx = q.x - p.x, dy = q.y - p.y, d = Math.sqrt(dx * dx + dy * dy) || 1, f = (d - 70) * 0.04; fx += dx / d * f; fy += dy / d * f; });
+        if (all) { fx -= p.x * 0.002; fy -= p.y * 0.002; }
+        F[i] = [fx, fy];
+      });
+      movers.forEach(function (i) { P[i].x += Math.max(-15, Math.min(15, F[i][0])); P[i].y += Math.max(-15, Math.min(15, F[i][1])); });
     }
-    var title = 'Notes | ' + P.name, desc = 'Working notes by ' + P.name + ' on chip design, VLSI, computer architecture and more.';
+    return P.map(function (p) { return {x: Math.round(p.x * 10) / 10, y: Math.round(p.y * 10) / 10}; });
+  }
+  function plainText(s) {
+    return String(s || '').replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, function (m, t, l) { return l || t; })
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/[#*>|`$_~-]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  function shell(P, o) {
     var h = [];
     h.push('<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="color-scheme" content="light">');
-    h.push('<title>' + esc(title) + '</title>\n<meta name="description" content="' + esc(desc) + '">\n<meta name="author" content="' + esc(P.name) + '">');
-    h.push('<link rel="canonical" href="' + SITE + 'notes.html">\n<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">');
-    h.push('<meta property="og:title" content="' + esc(title) + '">\n<meta property="og:description" content="' + esc(desc) + '">\n<meta property="og:url" content="' + SITE + 'notes.html">\n<meta property="og:image" content="' + SITE + 'photo.jpg">');
+    h.push('<title>' + esc(o.title) + '</title>\n<meta name="description" content="' + esc(o.desc) + '">\n<meta name="author" content="' + esc(P.name) + '">');
+    h.push('<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">');
+    h.push('<link rel="canonical" href="' + o.canonical + '">\n<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">');
+    h.push('<meta property="og:title" content="' + esc(o.title) + '">\n<meta property="og:description" content="' + esc(o.desc) + '">\n<meta property="og:url" content="' + o.canonical + '">\n<meta property="og:image" content="' + SITE + 'photo.jpg">');
     h.push('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
     h.push('<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">');
-    h.push('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">\n<link rel="stylesheet" href="style.css">\n</head>\n<body class="nt-page">');
-    h.push('<div class="nt-app" id="nt-app">');
+    h.push('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">\n<link rel="stylesheet" href="/style.css">\n</head>');
+    h.push('<body class="nt-page" data-note="' + esc(o.id || '') + '">\n<div class="nt-app" id="nt-app">');
     h.push('<header class="nt-top"><button class="nt-btn" id="nt-t-side" type="button" aria-pressed="true">Sidebar</button>' +
-      '<a class="nt-home" href="./">' + esc(P.name) + '</a><span class="nt-sep">/</span><a class="nt-title" href="#">Notes</a>' +
-      '<input id="nt-q" type="search" placeholder="Search notes" aria-label="Search notes"><button class="nt-btn" id="nt-t-graph" type="button" aria-pressed="true">Graph</button></header>');
-    h.push('<aside class="nt-side" id="nt-side" aria-label="All notes"><div class="nt-tree">' + tree(root, 0) + '</div></aside>');
-    h.push('<div class="nt-gpane" id="nt-gpane"><canvas id="nt-graph" aria-label="Graph of how notes link to each other"></canvas><p class="nt-hint">Scroll to zoom &middot; drag to move &middot; click a dot to open</p></div>');
-    h.push('<main class="nt-main" id="nt-main"><div class="nt-read">');
-    var recent = list.slice().sort(function (a, b) { return (b.u || '').localeCompare(a.u || ''); }).slice(0, 8);
-    h.push('<div class="nt-view" id="nt-home"><h1>Notes</h1><p class="nt-meta">' + list.length + ' notes. Pick one from the sidebar, or click a dot in the graph. Lines show which notes link to each other.</p>' +
-      (recent.length ? '<h4 class="nt-h">Recently updated</h4><ul class="nt-list">' + recent.map(function (n) { return '<li><a href="#' + n.s + '">' + esc(n.t) + '</a><span class="when">' + esc(fmtDay(n.u)) + '</span></li>'; }).join('') + '</ul>' : '') +
-      '<p class="nt-back-home"><a href="./">&larr; Back to ' + esc(P.name) + '</a></p></div>');
-    list.forEach(function (n) {
-      var tags = String(n.tags).split(',').map(function (x) { return x.trim(); }).filter(Boolean);
-      var b = back[n.s] || [];
-      h.push('<article class="nt-view" id="n-' + n.s + '" hidden><p class="nt-path">' + n.f.split('/').map(function (x) { return esc(x.trim()); }).filter(Boolean).join(' &rsaquo; ') + '</p><h1>' + esc(n.t) + '</h1>' +
-        '<p class="nt-meta">' + (n.u ? 'Updated ' + esc(fmtDay(n.u)) : '') + (tags.length ? ' &nbsp;' + tags.map(function (t) { return '<span class="nt-tag">' + esc(t) + '</span>'; }).join('') : '') + '</p>' +
-        '<div class="nt-body">' + n.html + '</div>' +
-        (b.length ? '<div class="nt-back"><h4>Linked from</h4><ul>' + b.map(function (x) { return '<li><a href="#' + x.s + '">' + esc(x.t) + '</a></li>'; }).join('') + '</ul></div>' : '') + '</article>');
-    });
-    h.push('</div></main>\n</div>');
-    var idx = {}; list.forEach(function (n, i) { idx[n.s] = i; });
-    var seen = {}, E = [];
-    links.forEach(function (e) { var a = idx[e[0]], b = idx[e[1]], k = Math.min(a, b) + '-' + Math.max(a, b); if (!seen[k]) { seen[k] = 1; E.push([a, b]); } });
-    var G = {nodes: list.map(function (n) { return {s: n.s, t: n.t, f: tops.indexOf(n.f.split('/')[0].trim())}; }), links: E};
-    h.push('<script>window.NT_GRAPH = ' + JSON.stringify(G).replace(/</g, '\\u003c') + ';</script>');
-    h.push('<script src="notes.js"></script>');
+      '<a class="nt-home" href="/">' + esc(P.name) + '</a><span class="nt-sep">/</span><a class="nt-title" href="/notes.html">Notes</a>' +
+      '<input id="nt-q" type="search" placeholder="Search notes  ( / )" aria-label="Search notes" autocomplete="off"><button class="nt-btn" id="nt-t-graph" type="button" aria-pressed="true">Graph</button></header>');
+    h.push('<aside class="nt-side" id="nt-side" aria-label="All notes"><div class="nt-tree" id="nt-tree"><p class="nt-empty">Loading notes&hellip;</p></div><div class="nt-results" id="nt-results" hidden></div></aside>');
+    h.push('<div class="nt-gpane" id="nt-gpane"><canvas id="nt-graph" aria-label="Graph of how notes link to each other"></canvas>' +
+      '<div class="nt-gbar"><button class="nt-chip" id="nt-g-local" type="button">This note</button><button class="nt-chip" id="nt-g-all" type="button">All notes</button></div>' +
+      '<p class="nt-hint">Scroll to zoom &middot; drag to move &middot; click a dot to open</p></div>');
+    h.push('<main class="nt-main" id="nt-main"><div class="nt-read">\n' + o.main + '\n</div></main>\n</div>');
+    h.push('<script src="/notes-app.js"></script>');
     h.push('<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>');
     h.push('<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="window.ntMath && window.ntMath()"></script>');
     h.push('</body>\n</html>\n');
     return h.join('\n');
   }
+  /* everything the notes section needs: home page, one page per note, index and search files */
+  function notesBuild(d, arr, prev) {
+    var P = d.profile, list = normNotes(arr), back = noteLinks(list, ''), pos = layout(list, prev), files = {};
+    var byFolder = {};
+    list.forEach(function (n) { (byFolder[n.f] = byFolder[n.f] || []).push(n); });
+    var folders = Object.keys(byFolder).sort(function (a, b) { return a.localeCompare(b, undefined, {numeric: true}); });
+    var recent = list.slice().sort(function (a, b) { return (b.u || '').localeCompare(a.u || ''); }).slice(0, 10);
+    var home = '<div class="nt-view" id="nt-home"><h1>Notes</h1><p class="nt-meta">' + list.length + ' notes in ' + folders.length + ' folders. Pick one from the sidebar, search with <kbd>/</kbd>, or click a dot in the graph.</p>' +
+      (recent.length ? '<h4 class="nt-h">Recently updated</h4><ul class="nt-list">' + recent.map(function (n) { return '<li><a href="notes/' + n.id + '.html">' + esc(n.t) + '</a><span class="when">' + esc(fmtDay(n.u)) + '</span></li>'; }).join('') + '</ul>' : '') +
+      '<h4 class="nt-h">All notes</h4><div class="nt-all">' + folders.map(function (f) {
+        return '<p class="nt-path">' + esc(f).replace(/ \/ /g, ' &rsaquo; ') + '</p><ul>' + byFolder[f].slice().sort(function (a, b) { return a.t.localeCompare(b.t, undefined, {numeric: true}); }).map(function (n) { return '<li><a href="notes/' + n.id + '.html">' + esc(n.t) + '</a></li>'; }).join('') + '</ul>';
+      }).join('') + '</div><p class="nt-back-home"><a href="/">&larr; Back to ' + esc(P.name) + '</a></p></div>';
+    files['notes.html'] = shell(P, {title: 'Notes | ' + P.name, desc: 'Working notes by ' + P.name + ' on chip design, VLSI, computer architecture and more.', canonical: SITE + 'notes.html', main: home});
+    list.forEach(function (n) {
+      var tags = String(n.tags).split(',').map(function (x) { return x.trim(); }).filter(Boolean), b = back[n.id] || [];
+      var main = '<article class="nt-view" id="n-' + n.id + '"><p class="nt-path">' + esc(n.f).replace(/ \/ /g, ' &rsaquo; ') + '</p><h1>' + esc(n.t) + '</h1>' +
+        '<p class="nt-meta">' + (n.u ? 'Updated ' + esc(fmtDay(n.u)) : '') + (tags.length ? ' &nbsp;' + tags.map(function (t) { return '<span class="nt-tag">' + esc(t) + '</span>'; }).join('') : '') + '</p>' +
+        '<div class="nt-body">' + n.html + '</div>' +
+        (b.length ? '<div class="nt-back"><h4>Linked from</h4><ul>' + b.map(function (x) { return '<li><a href="' + x.id + '.html">' + esc(x.t) + '</a></li>'; }).join('') + '</ul></div>' : '') + '</article>';
+      var desc = plainText(n.body).slice(0, 155);
+      files['notes/' + n.id + '.html'] = shell(P, {id: n.id, title: n.t + ' | Notes | ' + P.name, desc: desc || n.t, canonical: SITE + 'notes/' + n.id + '.html', main: main});
+    });
+    var index = {v: 1, notes: list.map(function (n, i) { return {i: n.id, t: n.t, f: n.f, g: n.tags, u: n.u, x: pos[i].x, y: pos[i].y, l: n.out}; })};
+    files['notes/index.json'] = JSON.stringify(index) + '\n';
+    files['notes/search.json'] = JSON.stringify(list.map(function (n) { return [n.id, plainText(n.body).slice(0, 3000)]; })) + '\n';
+    return {files: files, index: index};
+  }
 
-  var api = {page: page, notes: notes, badge: badge, favicon: favicon, llms: llms, sitemap: sitemap, names: NAMES};
+  var api = {page: page, notesBuild: notesBuild, renderNote: renderNote, normNotes: normNotes, slugify: slugify, badge: badge, favicon: favicon, llms: llms, sitemap: sitemap, names: NAMES};
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.YSBuild = api;
 })(this);
