@@ -455,7 +455,7 @@
       "folder": "03 RTL Design / Clocking",
       "tags": "cdc, metastability",
       "updated": "2026-10-11",
-      "body": "A clock domain crossing (CDC) happens when a signal made on one clock is read by flops on a different, unrelated clock. The two clocks' edges have no fixed relationship, so sometimes the receiving flop samples the signal right while it changes. That breaks [[Setup and hold time]] and the flop goes **metastable**.\n\n## Single-bit signals\n\nUse a **two-flop synchronizer**: two flops in a row on the destination clock. The first one may go metastable, but it gets a full clock cycle to settle before the second one samples it.\n\n- Only works for single bits that stay stable long enough to be seen.\n- Never put logic between the two flops.\n\n## Multi-bit signals\n\nSyncing each bit on its own does not work: bits can settle on different cycles and give a value that never existed. Common fixes:\n\n| Situation | Approach |\n|---|---|\n| Counter or pointer | Gray code first, then sync (only one bit changes at a time) |\n| Data bus | Handshake (req/ack) or a synced enable |\n| Stream of data | Asynchronous FIFO with Gray-coded pointers |\n\n## Checking it\n\nNormal simulation rarely catches CDC bugs. Structural CDC tools look at the design and flag every crossing that has no proper synchronizer."
+      "body": "A clock domain crossing (CDC) happens when a signal made on one clock is read by flops on a different, unrelated clock. The two clocks' edges have no fixed relationship, so sometimes the receiving flop samples the signal right while it changes. That breaks [[Setup and hold time]] and the flop goes **metastable**.\n"
     },
     {
       "title": "Systolic arrays",
