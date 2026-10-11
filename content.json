@@ -462,7 +462,7 @@
       "folder": "02 Architecture / Accelerators",
       "tags": "ai hardware",
       "updated": "2026-10-11",
-      "body": "A systolic array is a grid of small, identical processing elements (PEs). Each PE does a multiply-accumulate (MAC) and passes data to its neighbours every clock cycle, like a heartbeat pumping data through the grid. That's where the name comes from.\n\n## Why it's fast\n\n- Each value read from memory gets reused many times as it travels across the array.\n- PEs only talk to their neighbours, so wires stay short and timing is easier to close (see [[Setup and hold time]]).\n- An N×N array does N² MACs every cycle once it's full.\n\n## Dataflows\n\n| Dataflow | What stays put in each PE |\n|---|---|\n| Weight stationary | Weights |\n| Output stationary | Partial sums |\n| Input stationary | Input activations |\n\nThe catch is fill and drain time: the array needs roughly 2N cycles before every PE is busy, so small matrices waste some of it.\n\nI built a 4×4 one in [Project Kalki](./#projects)."
+      "body": "A systolic array is a grid of small, identical processing elements (PEs). Each PE does a multiply-accumulate (MAC) and passes data to its neighbours every clock cycle, like a heartbeat pumping data through the grid. That's where the name comes from. The original roots stem from H T Kung's paper on Systolics, who is the same person who was involved in Brent-Kung adders.\n\nI built a 4×4 one in [Project Kalki](./#projects)."
     }
   ]
 }
