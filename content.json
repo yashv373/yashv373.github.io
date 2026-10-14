@@ -13,13 +13,18 @@
   },
   "news": [
     {
+      "date": "Oct 2026",
+      "text": "Caught and fixed a bug in Netgen LVS Open source tool. The fix is a part of the 1.5.325 release. ",
+      "logo": "github"
+    },
+    {
       "date": "Sep 2026",
       "text": "Visited SEMICON India 2026 at Yashobhoomi, New Delhi, with my team from ST.",
       "logo": "semi"
     },
     {
       "date": "Sep 2026",
-      "text": "Our ASCON-128a crypto accelerator got tapeout approval at the IEEE SSCS PICO Chipathon 2026. We couldn't make the final wafer run because of export rules on encryption hardware. A paper on it is under review at IEEE ICEE 2026.",
+      "text": "Our ASCON-128a crypto accelerator got tapeout approval at the IEEE SSCS PICO Chipathon 2026. We couldn't make the final wafer run because of export rules on encryption hardware. ",
       "logo": "sscs"
     },
     {
@@ -125,17 +130,6 @@
       "summary": "The paper works as a benchmark guide to answer: Which sense amplifier to choose for which Compute-In-Memory application when working with hybrid CMOS-MTJ circuits?",
       "links": "IEEE Xplore | https://ieeexplore.ieee.org/document/11506373",
       "logo": "jxcdc"
-    },
-    {
-      "title": "ASCON-128a AEAD Accelerator with an AXI4-Lite Interface in GF180MCU",
-      "link": "",
-      "authors": "Yashvardhan Singh, RS Tarun (IIIT Bangalore), Lakshmi Iyer (IIT Bombay)",
-      "venue": "Submitted to IEEE ICEE 2026",
-      "date": "",
-      "tag": "under review",
-      "summary": "This paper describes our plug-and-play encryption IP for open-source SoCs and its full open-source flow, from RTL and verification to a tapeout-ready 180nm layout.",
-      "links": "GitHub | https://github.com/yashv373/ascon128",
-      "logo": "ieee"
     },
     {
       "title": "Exploring Dopant Choice in HfO2 FE Layer for Negative Capacitance Junctionless FinFET Based Sensors through Sentaurus TCAD",
@@ -433,43 +427,6 @@
       "sub": "M# Manipal Hackathon 2024, 408 teams",
       "when": "Oct 2024",
       "logo": "techtatva"
-    }
-  ],
-  "notes": [
-    {
-      "title": "Intro to Photonics",
-      "folder": "06 Post CMOS / Photonics",
-      "tags": "light, photons",
-      "body": "## Photonics\n\nRay optics --> Wave Optics --> EM Waves --> Quantum Mechanics ( Photonics )\n\nExploit the speed of light for data travel purposes, since in the modern era, most of the time goes in data travel, not processing or compute.",
-      "updated": "2026-10-11"
-    },
-    {
-      "title": "Start here",
-      "folder": "00 Start",
-      "tags": "",
-      "updated": "2026-10-11",
-      "body": "These are my working notes on chip design, written the way I'd explain things to a friend. They're not polished, and they change as I learn.\n\nNotes link to each other, like [[Setup and hold time]] or [[Clock domain crossing]]. The graph shows how everything connects: click any dot to open that note.\n\nIf something here looks wrong, I'd love to hear about it."
-    },
-    {
-      "title": "Setup and hold time",
-      "folder": "05 Timing",
-      "tags": "timing, sta",
-      "updated": "2026-10-11",
-      "body": "Every flip-flop needs its input **D** to sit still for a short time around the clock edge.\n\n- **Setup time** ($t_{su}$): how long D must be stable *before* the edge.\n- **Hold time** ($t_h$): how long D must stay stable *after* the edge.\n\nBreak either one and the flop can go metastable, which is also the core problem in [[Clock domain crossing]].\n\n## Setup check\n\nData launched on one clock edge must arrive before the next edge, with setup time to spare:\n\n$$t_{cq} + t_{logic,max} + t_{su} \\le T_{clk} + t_{skew}$$\n\nIf this fails, you can slow the clock, shorten the logic path, or split it with a pipeline stage.\n\n## Hold check\n\nNew data must not arrive *too early* and overwrite the value being captured on the same edge:\n\n$$t_{cq} + t_{logic,min} \\ge t_h + t_{skew}$$\n\nHold does not depend on the clock period, so slowing the clock never fixes a hold violation. The usual fix is adding delay (buffers) on the short path.\n\n> Here $t_{skew}$ = capture clock arrival time minus launch clock arrival time."
-    },
-    {
-      "title": "Clock domain crossing",
-      "folder": "03 RTL Design / Clocking",
-      "tags": "cdc, metastability",
-      "updated": "2026-10-11",
-      "body": "A clock domain crossing (CDC) happens when a signal made on one clock is read by flops on a different, unrelated clock. The two clocks' edges have no fixed relationship, so sometimes the receiving flop samples the signal right while it changes. That breaks [[Setup and hold time]] and the flop goes **metastable**.\n"
-    },
-    {
-      "title": "Systolic arrays",
-      "folder": "02 Architecture / Accelerators",
-      "tags": "ai hardware",
-      "updated": "2026-10-11",
-      "body": "A systolic array is a grid of small, identical processing elements (PEs). Each PE does a multiply-accumulate (MAC) and passes data to its neighbours every clock cycle, like a heartbeat pumping data through the grid. That's where the name comes from. The original roots stem from H T Kung's paper on Systolics, who is the same person who was involved in Brent-Kung adders.\n\nI built a 4×4 one in [Project Kalki](./#projects)."
     }
   ]
 }
